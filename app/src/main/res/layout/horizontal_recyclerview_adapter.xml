@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="1dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        app:cardMaxElevation="2dp"
+        android:elevation="1dp"
+        android:layout_centerInParent="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/circleImageId"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:scaleType="centerCrop"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/white_red_speedometer"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/brandsNameId"
+                android:layout_below="@+id/circleImageId"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:textColor="#000"
+                android:text="Porsche"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="18sp"
+                android:autoSizeMaxTextSize="20sp"
+                android:paddingBottom="10dp"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

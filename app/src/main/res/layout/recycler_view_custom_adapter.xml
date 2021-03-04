@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/recycler_view_design"
+    android:paddingBottom="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="10dp">
+
+        <ImageView
+            android:id="@+id/imageUrlID"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/carID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Car ID:"
+        android:textStyle="bold"
+        android:textSize="23sp"
+        android:textColor="#fff"
+        android:fontFamily="serif-monospace"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/carMakeBrandID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Brand:"
+        android:textStyle="bold"
+        android:textSize="23sp"
+        android:textColor="#fff"
+        android:fontFamily="serif-monospace"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/carModelID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Model:"
+        android:textStyle="bold"
+        android:textSize="21sp"
+        android:textColor="#fff"
+        android:fontFamily="serif-monospace"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/horsePowerID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Horsepower:"
+        android:textStyle="bold"
+        android:textSize="21sp"
+        android:textColor="#fff"
+        android:fontFamily="serif-monospace"
+        android:layout_marginLeft="10dp"/>
+
+    <TextView
+        android:id="@+id/priceID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Price:"
+        android:textStyle="bold"
+        android:textSize="21sp"
+        android:textColor="#fff"
+        android:fontFamily="serif-monospace"
+        android:layout_marginLeft="10dp"/>
+
+</LinearLayout>
