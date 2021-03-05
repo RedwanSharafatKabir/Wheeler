@@ -6,15 +6,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AppActions.StartActivity"
-    android:padding="10dp"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="#F1F1F1">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/horizontalRecyclerViewID"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="100dp"/>
+        android:layout_marginBottom="100dp"
+        android:gravity="center"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:id="@+id/linearlayoutId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="-100dp">
+
+        <ImageView
+            android:id="@+id/left_slideId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+            android:layout_marginRight="20dp"/>
+
+        <ImageView
+            android:id="@+id/right_slideId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
 
 </FrameLayout>

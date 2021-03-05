@@ -1,33 +1,29 @@
 package com.example.wheeler.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
+import com.example.wheeler.AppActions.MainActivity;
 import com.example.wheeler.R;
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<HorizontalRecyclerViewAdapter.viewHolder>{
 
-    private ArrayList<String> brandsName = new ArrayList<>();
-    private ArrayList<String> brandsImageUrl = new ArrayList<>();
+    private ArrayList<String> brandsName;
+    private int[] brandImages;
     private Context context;
 
-    public HorizontalRecyclerViewAdapter(Context context, ArrayList<String> brandsName, ArrayList<String> brandsImageUrl) {
-        this.context = context;
+    public HorizontalRecyclerViewAdapter(Context context, ArrayList<String> brandsName, int[] brandImages) {
         this.brandsName = brandsName;
-        this.brandsImageUrl = brandsImageUrl;
+        this.brandImages = brandImages;
+        this.context = context;
     }
 
     @NonNull
@@ -39,19 +35,20 @@ public class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<Horizont
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
-        Glide.with(context).asBitmap().load(brandsImageUrl.get(position)).into(holder.circleImageView);
+        int brand_image = brandImages[position];
+        holder.circleImageView.setImageResource(brand_image);
+
         holder.brandNameText.setText(brandsName.get(position));
-        holder.circleImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, brandsName.get(position), Toast.LENGTH_SHORT).show();
-            }
+        holder.circleImageView.setOnClickListener(v -> {
+            Toast.makeText(context, brandsName.get(position), Toast.LENGTH_SHORT).show();
+            Intent it = new Intent(context, MainActivity.class);
+            context.startActivity(it);
         });
     }
 
     @Override
     public int getItemCount() {
-        return brandsImageUrl.size();
+        return brandImages.length;
     }
 
     public class viewHolder extends RecyclerView.ViewHolder{

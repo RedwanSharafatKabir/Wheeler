@@ -8,7 +8,4 @@
         android:startColor="#D8292828"
         android:endColor="#C8CD0808"/>
 
-<!--    <solid-->
-<!--        android:color="#63CD0808"/>-->
-
 </shape>

@@ -4,19 +4,22 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="1dp">
+    android:layout_margin="5dp"
+    android:background="#F1F1F1">
 
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
-        app:cardMaxElevation="2dp"
         android:elevation="1dp"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:background="#F1F1F1">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#F1F1F1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" >
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/circleImageId"
@@ -24,7 +27,8 @@
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/white_red_speedometer"/>
+                android:src="@drawable/white_red_speedometer"
+                android:background="#F1F1F1"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -38,10 +42,8 @@
                 android:text="Porsche"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="18sp"
-                android:autoSizeMaxTextSize="20sp"
-                android:paddingBottom="10dp"/>
+                android:textSize="20sp"
+                android:background="#F1F1F1"/>
 
         </RelativeLayout>
 

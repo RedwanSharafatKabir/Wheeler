@@ -1,6 +1,8 @@
 package com.example.wheeler.AppActions;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,13 +10,13 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.example.wheeler.R;
+import com.example.wheeler.RecyclerView.HorizontalRecyclerViewAdapter;
 
 import java.util.ArrayList;
 
 public class StartActivity extends AppCompatActivity {
 
     private ArrayList<String> brandsName = new ArrayList<>();
-    private ArrayList<String> brandsImageUrl = new ArrayList<>();
     private int[] brandImages = {R.drawable.porsche, R.drawable.kia, R.drawable.hyundai, R.drawable.buick, R.drawable.acura,
             R.drawable.lamborghini, R.drawable.infiniti, R.drawable.ford, R.drawable.bmw, R.drawable.mazda, R.drawable.audi,
             R.drawable.maserati, R.drawable.jeep, R.drawable.fiat, R.drawable.mitsubishi, R.drawable.lexus, R.drawable.volkswagen,
@@ -29,8 +31,7 @@ public class StartActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_start);
 
-        Intent it = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(it);
+        initImageBitmap();
     }
 
     private void initImageBitmap(){
@@ -74,5 +75,16 @@ public class StartActivity extends AppCompatActivity {
         brandsName.add("GMC");
         brandsName.add("Volvo");
         brandsName.add("Jaguar");
+
+        initRecyclerView();
+    }
+
+    private void initRecyclerView(){
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView recyclerView = findViewById(R.id.horizontalRecyclerViewID);
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        HorizontalRecyclerViewAdapter adapter = new HorizontalRecyclerViewAdapter(this, brandsName, brandImages);
+        recyclerView.setAdapter(adapter);
     }
 }
