@@ -4,20 +4,17 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
-    android:background="#F1F1F1">
+    android:layout_margin="5dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:elevation="1dp"
-        android:layout_centerInParent="true"
-        android:background="#F1F1F1">
+        android:layout_centerInParent="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F1F1F1"
             android:paddingTop="10dp"
             android:paddingBottom="10dp" >
 
@@ -27,8 +24,7 @@
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/white_red_speedometer"
-                android:background="#F1F1F1"/>
+                android:src="@drawable/white_red_speedometer"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -42,8 +38,7 @@
                 android:text="Porsche"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
-                android:textSize="20sp"
-                android:background="#F1F1F1"/>
+                android:textSize="20sp"/>
 
         </RelativeLayout>
 

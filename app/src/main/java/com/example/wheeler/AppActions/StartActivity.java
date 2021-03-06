@@ -6,8 +6,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.example.wheeler.R;
 import com.example.wheeler.RecyclerView.HorizontalRecyclerViewAdapter;
@@ -24,6 +27,7 @@ public class StartActivity extends AppCompatActivity {
             R.drawable.ferrari, R.drawable.honda, R.drawable.cadillac, R.drawable.chrysler, R.drawable.chevrolet, R.drawable.lincoln,
             R.drawable.bentley, R.drawable.alfa_romeo, R.drawable.subaru, R.drawable.rolls_royce, R.drawable.toyota, R.drawable.land_rover,
             R.drawable.nissan, R.drawable.scion, R.drawable.gmc, R.drawable.volvo, R.drawable.jaguar};
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,7 @@ public class StartActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_start);
 
+        recyclerView = findViewById(R.id.horizontalRecyclerViewID);
         initImageBitmap();
     }
 
@@ -81,7 +86,6 @@ public class StartActivity extends AppCompatActivity {
 
     private void initRecyclerView(){
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        RecyclerView recyclerView = findViewById(R.id.horizontalRecyclerViewID);
         recyclerView.setLayoutManager(linearLayoutManager);
 
         HorizontalRecyclerViewAdapter adapter = new HorizontalRecyclerViewAdapter(this, brandsName, brandImages);
