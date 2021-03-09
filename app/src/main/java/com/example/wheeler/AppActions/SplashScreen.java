@@ -1,7 +1,10 @@
 package com.example.wheeler.AppActions;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,15 +13,26 @@ import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.example.wheeler.R;
+import com.example.wheeler.UserAuthentication.SigninActivity;
+import com.example.wheeler.UserAuthentication.SignupActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class SplashScreen extends AppCompatActivity {
 
     int SPLASH_TIME_OUT = 3000;
     ImageView imageView;
     Button signInButton;
+    FirebaseUser firebaseUser = null;
+    String passedString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +47,80 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(() -> signInButton.isClickable(), SPLASH_TIME_OUT);
     }
 
+    @Override
+    protected void onStart() {
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        rememberMeMethod();
+
+        if (firebaseUser != null && !passedString.isEmpty()) {
+            finish();
+            Intent it = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(it);
+        }
+        super.onStart();
+    }
+
     public void signInBtnMethod(View v){
-        Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-        startActivity(intent);
+        SigninActivity signinActivity = new SigninActivity();
+        signinActivity.show(getSupportFragmentManager(), "Sample dialog");
+    }
+
+    public void joinNowBtnMethod(View v){
+        SignupActivity signupActivity = new SignupActivity();
+        signupActivity.show(getSupportFragmentManager(), "Sample dialog");
+    }
+
+    public void rememberMeMethod(){
+        try {
+            FileInputStream fileInputStream = openFileInput("Personal_Info.txt");
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String recievedMessage;
+            StringBuffer stringBuffer = new StringBuffer();
+
+            while((recievedMessage=bufferedReader.readLine())!=null){
+                stringBuffer.append(recievedMessage);
+            }
+
+            passedString = stringBuffer.toString();
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertDialogBuilder;
+        alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle(R.string.alert_title);
+        alertDialogBuilder.setMessage(R.string.alert_message);
+        alertDialogBuilder.setIcon(R.drawable.exit);
+        alertDialogBuilder.setCancelable(false);
+
+        alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                System.exit(0);
+            }
+        });
+        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        alertDialogBuilder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 }

@@ -1,12 +1,18 @@
 package com.example.wheeler.AppActions;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -15,6 +21,7 @@ import com.example.wheeler.Api_Inteface.CarApiClient;
 import com.example.wheeler.ModelClass.CarApiData;
 import com.example.wheeler.R;
 import com.example.wheeler.RecyclerView.RecyclerViewCustomAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,88 +34,48 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
-    String brandNameContent = "", brandImageContent = "";
-    public RecyclerView recyclerView;
-    String baseURL = "https://private-anon-10a3306dd3-carsapi1.apiary-mock.com/";
-    CarApiClient carApiClient;
-    RecyclerViewCustomAdapter recyclerViewCustomAdapter;
-    List<CarApiData> carApiDataList;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseURL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        carApiClient = retrofit.create(CarApiClient.class);
-
-        carApiDataList = new ArrayList<>();
-        recyclerView = findViewById(R.id.recyclerViewID);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewCustomAdapter = new RecyclerViewCustomAdapter(this, carApiDataList);
-
-        getDataFromApi();
+        bottomNavigationView = findViewById(R.id.bottomNavigationID);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
     }
 
-    public void getDataFromApi(){
-        Call<List<CarApiData>> call = carApiClient.getCarData();
-        call.enqueue(new Callback<List<CarApiData>>() {
-            @Override
-            public void onResponse(Call<List<CarApiData>> call, Response<List<CarApiData>> response) {
-                if(response.isSuccessful()){
-                    List<CarApiData> dataList = response.body();
-                    recyclerViewCustomAdapter.setData(dataList);
-                    recyclerView.setAdapter(recyclerViewCustomAdapter);
-                    recyclerViewCustomAdapter.notifyDataSetChanged();
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.homeID:
+                ChooseFavoriteBrandsActivity fragment = new ChooseFavoriteBrandsActivity();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragmentID, fragment);
+                transaction.commit();
+                break;
 
-                    for (CarApiData carApiData : dataList) {
-                        brandNameContent += carApiData.getMake() + " ";
-                        brandImageContent += carApiData.getImg_url() + "\n";
-                    }
+            case R.id.notificationID:
+                Toast.makeText(this, "Notification Fragment", Toast.LENGTH_SHORT).show();
+                break;
 
-                    Log.d("Brand Logo", brandImageContent);
-                    Log.d("Unique brands name", countDistinctWords(brandNameContent));
+            case R.id.ordersID:
+                Toast.makeText(this, "Order Record Fragment", Toast.LENGTH_SHORT).show();
+                break;
 
-//                    for (CarApiData carApiData : dataList) {
-//                        carApiData.setId(carApiData.getId());
-//                        carApiData.setHorsepower(carApiData.getHorsepower());
-//                        carApiData.setMake(carApiData.getMake());
-//                        carApiData.setModel(carApiData.getModel());
-//                        carApiData.setPrice(carApiData.getPrice());
-//                        carApiData.setImage_url(carApiData.getImage_url());
-//                        carApiDataList.add(carApiData);
-//                    }
-//                    recyclerViewCustomAdapter.setData(carApiDataList);
-//                    recyclerView.setAdapter(recyclerViewCustomAdapter);
-//                    recyclerViewCustomAdapter.notifyDataSetChanged();
-                }
-            }
+            case R.id.cartID:
+                Toast.makeText(this, "Cart List Fragment", Toast.LENGTH_SHORT).show();
+                break;
 
-            @Override
-            public void onFailure(Call<List<CarApiData>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Response failure: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    public static String countDistinctWords(String str){
-        Set<String> object = new HashSet<String>();
-        String[] words = str.split(" ");
-        String uniqueElements = "";
-
-        for(String wrds: words){
-            object.add(wrds);
+            case R.id.accountID:
+                Toast.makeText(this, "Account Profile Fragment", Toast.LENGTH_SHORT).show();
+                break;
         }
 
-        for(String elements: object){
-            uniqueElements += elements + " ";
-        }
-
-        return uniqueElements;
+        return true;
     }
 }

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UserAuthentication.SigninActivity"
+    android:background="#ffffff">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp">
+
+            <LinearLayout
+                android:id="@+id/second"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/bdCountryCodeID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:text=" +88"
+                        android:textSize="18sp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="5dp"
+                        android:textColor="#000000"
+                        android:fontFamily="sans-serif"
+                        android:paddingBottom="10dp"
+                        android:drawableLeft="@drawable/ic_phone_black_24dp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.santalu.maskedittext.MaskEditText
+                            android:id="@+id/loginPhoneID"
+                            android:hint=" phone number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="#000000"
+                            app:met_mask="###########"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/loginpassID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint=" Password"
+                        android:inputType="textPassword"
+                        android:textColor="#000000"
+                        android:drawableLeft="@drawable/ic_lock_black_24dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/forgetPassID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:layout_gravity="center|end"
+                    android:text="Forgot password ?"
+                    android:textAlignment="textEnd"
+                    tools:ignore="RtlCompat"
+                    android:textAllCaps="false"
+                    android:textSize="17dp"
+                    android:paddingRight="10dp"/>
+
+                <CheckBox
+                    android:id="@+id/rememberCheckBoxID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text=" Remember me as logged in"
+                    android:textColor="#000000"
+                    android:textSize="17dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center|bottom"
+                android:paddingTop="40dp"
+                android:layout_gravity="bottom">
+
+                <Button
+                    android:id="@+id/closeDialogID1"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Close"
+                    android:textSize="16sp"
+                    android:textColor="#00A6D8"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:clickable="true"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="sans-serif"/>
+
+                <ImageButton
+                    android:id="@+id/SigninID"
+                    android:layout_width="80dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:src="@drawable/ic_arrow_forward_black_24dp"
+                    android:background="@drawable/customize_login_signup_background"
+                    android:layout_marginLeft="20dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

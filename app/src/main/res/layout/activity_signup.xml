@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserAuthentication.SignupActivity"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:paddingBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/first">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/signupEmailID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="  email"
+                        android:inputType="textEmailAddress"
+                        android:textColor="#000000"
+                        android:drawableLeft="@drawable/ic_email_black_24dp"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/signupUsernameID"
+                        android:hint=" username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textColor="#000000"
+                        android:drawableLeft="@drawable/one_person_username"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/bdCountryCodeID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:text="Bangladesh  +88"
+                        android:textSize="18sp"
+                        android:paddingRight="10dp"
+                        android:paddingLeft="10dp"
+                        android:textColor="#000000"
+                        android:fontFamily="sans-serif"
+                        android:paddingBottom="10dp"/>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.santalu.maskedittext.MaskEditText
+                            android:id="@+id/signupPhoneID"
+                            android:hint=" phone number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="#000000"
+                            app:met_mask="###########"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/signupPasswordID"
+                        android:hint=" password: 7+ characters"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_lock_black_24dp"
+                        android:inputType="textPassword"
+                        android:textColor="#000000"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center|bottom"
+                android:paddingTop="40dp"
+                android:paddingBottom="10dp"
+                android:layout_gravity="bottom">
+
+                <Button
+                    android:id="@+id/closeDialogID"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="Close"
+                    android:textSize="16sp"
+                    android:textColor="#00A6D8"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:background="@android:color/transparent"
+                    android:layout_marginRight="20dp"
+                    android:fontFamily="sans-serif"/>
+
+                <ImageButton
+                    android:id="@+id/SignupID"
+                    android:layout_width="80dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:src="@drawable/ic_arrow_forward_black_24dp"
+                    android:background="@drawable/customize_login_signup_background"
+                    android:layout_marginLeft="20dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

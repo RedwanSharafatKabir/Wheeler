@@ -90,7 +90,8 @@
                     android:textSize="20sp"
                     android:textAllCaps="true"
                     android:fontFamily="sans-serif"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:onClick="joinNowBtnMethod"/>
 
             </LinearLayout>
 

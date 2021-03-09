@@ -1,24 +1,20 @@
 package com.example.wheeler.AppActions;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
-
+import android.view.ViewGroup;
+import android.widget.Button;
 import com.example.wheeler.R;
 import com.example.wheeler.RecyclerView.HorizontalRecyclerViewAdapter;
-
 import java.util.ArrayList;
 
-public class StartActivity extends AppCompatActivity {
+public class ChooseFavoriteBrandsActivity extends Fragment {
 
+    View views;
     private ArrayList<String> brandsName = new ArrayList<>();
     private int[] brandImages = {R.drawable.porsche, R.drawable.kia, R.drawable.hyundai, R.drawable.buick, R.drawable.acura,
             R.drawable.lamborghini, R.drawable.infiniti, R.drawable.ford, R.drawable.bmw, R.drawable.mazda, R.drawable.audi,
@@ -28,15 +24,19 @@ public class StartActivity extends AppCompatActivity {
             R.drawable.bentley, R.drawable.alfa_romeo, R.drawable.subaru, R.drawable.rolls_royce, R.drawable.toyota, R.drawable.land_rover,
             R.drawable.nissan, R.drawable.scion, R.drawable.gmc, R.drawable.volvo, R.drawable.jaguar};
     private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private Button continueBtn;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_start);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        views = inflater.inflate(R.layout.activity_choose_favorite_brands, container, false);
 
-        recyclerView = findViewById(R.id.horizontalRecyclerViewID);
+        recyclerView = views.findViewById(R.id.horizontalRecyclerViewID);
+        continueBtn = views.findViewById(R.id.continueBtnId);
+        continueBtn.setVisibility(View.GONE);
         initImageBitmap();
+
+        return views;
     }
 
     private void initImageBitmap(){
@@ -85,10 +85,10 @@ public class StartActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView(){
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        HorizontalRecyclerViewAdapter adapter = new HorizontalRecyclerViewAdapter(this, brandsName, brandImages);
+        HorizontalRecyclerViewAdapter adapter = new HorizontalRecyclerViewAdapter(getContext(), brandsName, brandImages, continueBtn);
         recyclerView.setAdapter(adapter);
     }
 }

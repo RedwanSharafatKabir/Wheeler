@@ -4,33 +4,58 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp">
+    android:layout_margin="5dp"
+    android:background="#fff">
 
     <androidx.cardview.widget.CardView
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:elevation="1dp"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:background="#fff">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="10dp"
-            android:paddingBottom="10dp" >
+            android:paddingBottom="10dp"
+            android:background="#fff">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageId"
+            <LinearLayout
+                android:id="@+id/circleImageLayoutId"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:scaleType="centerCrop"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/white_red_speedometer"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="#fff">
+
+                <ImageView
+                    android:id="@+id/selectImageIdID"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_baseline_done_24"
+                    android:background="@drawable/purple_circle_shape"
+                    android:padding="5dp"
+                    android:layout_marginBottom="-20dp"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/circleImageId"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/white_red_speedometer"
+                    android:background="@android:color/transparent"/>
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/brandsNameId"
-                android:layout_below="@+id/circleImageId"
+                android:layout_below="@+id/circleImageLayoutId"
                 android:layout_centerHorizontal="true"
                 android:gravity="center"
                 android:layout_marginTop="5dp"
@@ -38,7 +63,8 @@
                 android:text="Porsche"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
-                android:textSize="20sp"/>
+                android:textSize="20sp"
+                android:background="#fff"/>
 
         </RelativeLayout>
 

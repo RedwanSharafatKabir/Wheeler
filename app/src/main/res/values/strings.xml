@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Wheeler</string>
+    <string name="alert_title">Exit ?</string>
+    <string name="alert_message">Are you sure you want to turn off this application ?</string>
+    <string name="email_alert">Email is already used\nYou can use one email address only once for client app or agent app</string>
 
 </resources>
