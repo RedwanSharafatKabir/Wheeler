@@ -1,9 +1,6 @@
 package com.example.wheeler.RecyclerView;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +14,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wheeler.AppActions.ChooseCarModelActivity;
-import com.example.wheeler.AppActions.ChooseFavoriteBrandsActivity;
-import com.example.wheeler.AppActions.MainActivity;
 import com.example.wheeler.R;
 
 import java.util.ArrayList;
@@ -51,7 +46,7 @@ public class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<Horizont
         int brand_image = brandImages[position];
         holder.brandNameText.setText(brandsName.get(position));
         holder.circleImageView.setImageResource(brand_image);
-
+        
         holder.circleImageView.setOnClickListener(v -> {
             holder.selectedImage.setVisibility(View.VISIBLE);
             continueBtn.setVisibility(View.VISIBLE);

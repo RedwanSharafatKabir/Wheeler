@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="15dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/recycler_view_design"
@@ -29,8 +30,8 @@
         android:layout_marginTop="10dp"
         android:text="Car ID:"
         android:textStyle="bold"
-        android:textSize="23sp"
-        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textColor="#000"
         android:fontFamily="serif-monospace"
         android:layout_marginLeft="10dp"/>
 
@@ -40,8 +41,8 @@
         android:layout_height="wrap_content"
         android:text="Brand:"
         android:textStyle="bold"
-        android:textSize="23sp"
-        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textColor="#000"
         android:fontFamily="serif-monospace"
         android:layout_marginLeft="10dp"/>
 
@@ -51,8 +52,8 @@
         android:layout_height="wrap_content"
         android:text="Model:"
         android:textStyle="bold"
-        android:textSize="21sp"
-        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textColor="#000"
         android:fontFamily="serif-monospace"
         android:layout_marginLeft="10dp"/>
 
@@ -62,8 +63,8 @@
         android:layout_height="wrap_content"
         android:text="Horsepower:"
         android:textStyle="bold"
-        android:textSize="21sp"
-        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textColor="#000"
         android:fontFamily="serif-monospace"
         android:layout_marginLeft="10dp"/>
 
@@ -74,7 +75,7 @@
         android:text="Price:"
         android:textStyle="bold"
         android:textSize="21sp"
-        android:textColor="#fff"
+        android:textColor="#F62525"
         android:fontFamily="serif-monospace"
         android:layout_marginLeft="10dp"/>
 

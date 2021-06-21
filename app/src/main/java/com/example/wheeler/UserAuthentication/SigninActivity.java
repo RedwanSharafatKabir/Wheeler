@@ -83,6 +83,7 @@ public class SigninActivity extends AppCompatDialogFragment implements View.OnCl
         linearLayoutID.setAnimation(fromTop);
         signinButton.setAnimation(fromBottom);
         checkBox = view.findViewById(R.id.rememberCheckBoxID);
+        checkBox.setChecked(true);
         mAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("User Information");
 

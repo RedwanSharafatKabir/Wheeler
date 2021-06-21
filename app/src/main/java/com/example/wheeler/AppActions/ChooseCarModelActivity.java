@@ -28,7 +28,7 @@ public class ChooseCarModelActivity extends Fragment {
     View views;
     String brandNameContent = "", brandImageContent = "";
     public RecyclerView recyclerView;
-    String baseURL = "https://private-anon-10a3306dd3-carsapi1.apiary-mock.com/";
+    String baseURL = "https://private-anon-d011506c2c-carsapi1.apiary-mock.com/";
     CarApiClient carApiClient;
     RecyclerViewCustomAdapter recyclerViewCustomAdapter;
     List<CarApiData> carApiDataList;
@@ -52,7 +52,7 @@ public class ChooseCarModelActivity extends Fragment {
         return views;
     }
 
-    public void getDataFromApi(){
+    private void getDataFromApi(){
         Call<List<CarApiData>> call = carApiClient.getCarData();
         call.enqueue(new Callback<List<CarApiData>>() {
             @Override
@@ -80,6 +80,7 @@ public class ChooseCarModelActivity extends Fragment {
 //                        carApiData.setImage_url(carApiData.getImage_url());
 //                        carApiDataList.add(carApiData);
 //                    }
+//
 //                    recyclerViewCustomAdapter.setData(carApiDataList);
 //                    recyclerView.setAdapter(recyclerViewCustomAdapter);
 //                    recyclerViewCustomAdapter.notifyDataSetChanged();
@@ -93,7 +94,7 @@ public class ChooseCarModelActivity extends Fragment {
         });
     }
 
-    public static String countDistinctWords(String str){
+    private static String countDistinctWords(String str){
         Set<String> object = new HashSet<String>();
         String[] words = str.split(" ");
         String uniqueElements = "";

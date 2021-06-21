@@ -46,7 +46,6 @@
                     android:layout_height="100dp"
                     android:scaleType="centerCrop"
                     android:layout_centerHorizontal="true"
-                    android:src="@drawable/white_red_speedometer"
                     android:background="@android:color/transparent"/>
 
             </LinearLayout>

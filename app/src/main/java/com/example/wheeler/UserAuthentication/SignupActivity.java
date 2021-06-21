@@ -1,9 +1,14 @@
 package com.example.wheeler.UserAuthentication;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.core.content.ContextCompat;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,6 +25,8 @@ import com.example.wheeler.AppActions.MainActivity;
 import com.example.wheeler.ModelClass.StoreUserData;
 import com.example.wheeler.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -39,8 +46,10 @@ public class SignupActivity extends AppCompatDialogFragment implements View.OnCl
     ImageButton signupButton;
     LinearLayout linearLayout;
     Button close;
-    FirebaseAuth mAuth;
-    DatabaseReference databaseReference;
+    AlertDialog waitingDialog;
+    ConnectivityManager cm;
+    NetworkInfo netInfo;
+    boolean connected = false;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -52,13 +61,10 @@ public class SignupActivity extends AppCompatDialogFragment implements View.OnCl
         View view = inflater.inflate(R.layout.activity_signup, null);
 
         builder.setView(view).setTitle("SIGN UP");
-        builder.setMessage("Create account with Gmail.\nYou can use a contact number only once." +
+        builder.setMessage("Create new account with gmail.\nYou can use a contact number only once." +
                 "\nOne contact number for multiple accounts " +
-                "will remove your first account data.");
+                "will remove your previous account data.");
         setCancelable(false);
-
-        mAuth = FirebaseAuth.getInstance();
-        databaseReference = FirebaseDatabase.getInstance().getReference("User Information");
 
         linearLayout = view.findViewById(R.id.first);
         close = view.findViewById(R.id.closeDialogID);
@@ -84,9 +90,11 @@ public class SignupActivity extends AppCompatDialogFragment implements View.OnCl
         final String phone = signupPhoneText.getText().toString();
         final String password = signupPasswordText.getText().toString();
         final String phonenumber = "+88" + phone;
+        cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        netInfo = cm.getActiveNetworkInfo();
 
         if(v.getId()==R.id.SignupID) {
-            final AlertDialog waitingDialog = new SpotsDialog.Builder().setContext(getContext()).build();
+            waitingDialog = new SpotsDialog.Builder().setContext(getContext()).build();
             waitingDialog.show();
 
             if (email.isEmpty()) {
@@ -125,65 +133,35 @@ public class SignupActivity extends AppCompatDialogFragment implements View.OnCl
             }
 
             else {
-                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener((OnCompleteListener<AuthResult>) task -> {
-                    if (task.isSuccessful()) {
-                        storeUserDataMethod(email, username, phonenumber);
-                        Toast.makeText(getActivity(), "Successfully registered", Toast.LENGTH_LONG).show();
+                if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+                    connected = true;
+                    waitingDialog.dismiss();
 
-                        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener((OnCompleteListener<AuthResult>) task1 -> {
-                            if (task1.isSuccessful()) {
-                                waitingDialog.dismiss();
-                                Intent it = new Intent(getActivity(), MainActivity.class);
-                                startActivity(it);
-                                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            } else {
-                                Toast t = Toast.makeText(getActivity(), "Authentication failed\nError : " +
-                                        task1.getException().getMessage(), Toast.LENGTH_LONG);
-                                t.setGravity(Gravity.CENTER, 0, 0);
-                                t.show();
-                            }
-                        });
+                    Intent it = new Intent(getActivity(), VerifyPhoneActivity.class);
+                    it.putExtra("emailKey", email);
+                    it.putExtra("usernameKey", username);
+                    it.putExtra("phonenumberKey", phonenumber);
+                    it.putExtra("passwordKey", password);
+                    startActivity(it);
+                    getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
-                    } else {
-                        if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                            Toast t = Toast.makeText(getActivity(), R.string.email_alert,
-                                    Toast.LENGTH_LONG);
-                            t.setGravity(Gravity.CENTER, 0, 0);
-                            t.show();
-                            waitingDialog.dismiss();
-                        } else {
-                            Toast t = Toast.makeText(getActivity(), "Authentication failed. Error : "
-                                    + "Connection lost.", Toast.LENGTH_LONG);
-                            t.setGravity(Gravity.CENTER, 0, 0);
-                            t.show();
-                            waitingDialog.dismiss();
-                        }
-                    }
-                });
-
-                signupEmailText.setText("");
-                signupUsernameText.setText("");
-                signupPhoneText.setText("");
-                signupPasswordText.setText("");
+                    signupEmailText.setText("");
+                    signupUsernameText.setText("");
+                    signupPhoneText.setText("");
+                    signupPasswordText.setText("");
+                } else {
+                    connected = false;
+                    Snackbar snackbar = Snackbar.make(getView(), "Turn on internet connection", Snackbar.LENGTH_LONG);
+                    View sbView = snackbar.getView();
+                    sbView.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.Red));
+                    snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
+                    snackbar.setDuration(10000).show();
+                }
             }
         }
 
         if(v.getId()==R.id.closeDialogID){
             getDialog().dismiss();
         }
-    }
-
-    public void storeUserDataMethod(String email, String username, String phone){
-        String displayname = phone;
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user!=null){
-            UserProfileChangeRequest profile;
-            profile= new UserProfileChangeRequest.Builder().setDisplayName(displayname).build();
-            user.updateProfile(profile).addOnCompleteListener(task -> {});
-        }
-
-        String Key_User_Info = phone;
-        StoreUserData storeUserData = new StoreUserData(email, username, phone);
-        databaseReference.child(Key_User_Info).setValue(storeUserData);
     }
 }
