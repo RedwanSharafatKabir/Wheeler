@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AppActions.Feedback"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:paddingBottom="60dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="How was the app user interface ?"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:textAllCaps="false"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+
+            <CheckBox
+                android:id="@+id/mostFriendlyCheckBoxId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Most user friendly app"/>
+
+            <CheckBox
+                android:id="@+id/averageFriendlyCheckBoxId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Average friendly"/>
+
+            <CheckBox
+                android:id="@+id/notFriendlyCheckBoxId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Not at all user friendly"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="How was our delivery service ?"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:textAllCaps="false"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"/>
+
+            <CheckBox
+                android:id="@+id/bestProductCheckBoxId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Product was as expected"/>
+
+            <CheckBox
+                android:id="@+id/bestAgentCheckBoxId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Helpful and punctual agents"/>
+
+            <CheckBox
+                android:id="@+id/averageAgentCheckBoxId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Average service"/>
+
+            <CheckBox
+                android:id="@+id/onlyHelpfulCheckBoxId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" Delivery time was not satisfactory"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Let us know how to improve ourself:"
+                android:textSize="18sp"
+                android:textColor="#000000"
+                android:textAllCaps="false"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/writtenFeedbackId"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:hint="Feedback"
+                    android:textSize="16sp"
+                    android:gravity="top|left"
+                    android:padding="10dp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/submitFeedbackID"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:text="Submit"
+                android:background="@drawable/customize_login_signup_background"
+                android:textColor="#ffffff"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="20dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

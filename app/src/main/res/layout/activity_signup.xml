@@ -62,13 +62,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:text="Bangladesh  +88"
+                        android:text=" +88"
                         android:textSize="18sp"
                         android:paddingRight="10dp"
-                        android:paddingLeft="10dp"
                         android:textColor="#000000"
                         android:fontFamily="sans-serif"
-                        android:paddingBottom="10dp"/>
+                        android:paddingLeft="5dp"
+                        android:paddingBottom="10dp"
+                        android:drawableLeft="@drawable/ic_phone_black_24dp"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="App">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/accountID"
+                    android:title="Account"
+                    android:icon="@drawable/one_person_username" />
+                <item
+                    android:id="@+id/aboutID"
+                    android:title="About"
+                    android:icon="@drawable/about" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Action">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/paymentMethodID"
+                    android:title="Payment method"
+                    android:icon="@drawable/ic_payment_black_24dp" />
+                <item
+                    android:id="@+id/feedbackID"
+                    android:title="Feedback"
+                    android:icon="@drawable/ic_feedback_black_24dp"/>
+                <item
+                    android:id="@+id/logoutID"
+                    android:title="Log Out"
+                    android:icon="@drawable/ic_logout_24"/>
+            </group>
+        </menu>
+    </item>
+
+</menu>

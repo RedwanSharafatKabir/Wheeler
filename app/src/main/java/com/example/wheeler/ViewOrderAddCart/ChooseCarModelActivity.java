@@ -1,18 +1,28 @@
-package com.example.wheeler.AppActions;
+package com.example.wheeler.ViewOrderAddCart;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.example.wheeler.Api_Inteface.CarApiClient;
 import com.example.wheeler.ModelClass.CarApiData;
 import com.example.wheeler.R;
 import com.example.wheeler.RecyclerView.RecyclerViewCustomAdapter;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,13 +35,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChooseCarModelActivity extends Fragment {
 
-    View views;
+    View views, parentLayout;
     String brandNameContent = "", brandImageContent = "";
     public RecyclerView recyclerView;
-    String baseURL = "https://private-anon-d011506c2c-carsapi1.apiary-mock.com/";
+    String TAG = "REDWAN", baseURL = "https://private-anon-d011506c2c-carsapi1.apiary-mock.com/";
     CarApiClient carApiClient;
     RecyclerViewCustomAdapter recyclerViewCustomAdapter;
     List<CarApiData> carApiDataList;
+    ProgressBar progressBar;
+    ConnectivityManager cm;
+    NetworkInfo netInfo;
+    Snackbar snackbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,11 +57,26 @@ public class ChooseCarModelActivity extends Fragment {
                 .build();
         carApiClient = retrofit.create(CarApiClient.class);
 
+        progressBar = views.findViewById(R.id.homeProgressbarId);
+        progressBar.setVisibility(View.VISIBLE);
+
         carApiDataList = new ArrayList<>();
         recyclerView = views.findViewById(R.id.recyclerViewID);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerViewCustomAdapter = new RecyclerViewCustomAdapter(getContext(), carApiDataList);
-        getDataFromApi();
+
+        parentLayout = views.findViewById(android.R.id.content);
+        cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            getDataFromApi();
+        } else {
+            snackbar = Snackbar.make(parentLayout, "Turn on internet connection", Snackbar.LENGTH_LONG);
+            View sbView = snackbar.getView();
+            sbView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.Red));
+            snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
+            snackbar.setDuration(10000).show();
+        }
 
         return views;
     }
@@ -62,6 +91,8 @@ public class ChooseCarModelActivity extends Fragment {
                     recyclerViewCustomAdapter.setData(dataList);
                     recyclerView.setAdapter(recyclerViewCustomAdapter);
                     recyclerViewCustomAdapter.notifyDataSetChanged();
+
+                    progressBar.setVisibility(View.GONE);
 
                     for (CarApiData carApiData : dataList) {
                         brandNameContent += carApiData.getMake() + " ";
@@ -89,7 +120,12 @@ public class ChooseCarModelActivity extends Fragment {
 
             @Override
             public void onFailure(Call<List<CarApiData>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Response failure: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                try {
+                    Log.i(TAG, "Response failure: " + t.getMessage());
+                } catch (Exception e){
+                    Toast.makeText(getActivity(), "Response failure: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

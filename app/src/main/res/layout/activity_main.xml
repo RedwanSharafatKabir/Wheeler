@@ -5,15 +5,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AppActions.ChooseFavoriteBrandsActivity"
+    tools:context=".AppActions.MainActivity"
     android:orientation="vertical"
     android:gravity="center">
 
-    <fragment
-        android:id="@+id/fragmentID"
-        android:name="com.example.wheeler.AppActions.ChooseCarModelActivity"
+    <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        tools:openDrawer="start"
+        android:id="@+id/drawerID"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/menuID"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:background="#A1A1A1">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/toolBarID"
+                    android:outlineAmbientShadowColor="#ffffff"
+                    android:outlineSpotShadowColor="#ffffff"
+                    android:theme="@style/Animation.Design.BottomSheetDialog"/>
+
+            </LinearLayout>
+
+            <fragment
+                android:id="@+id/fragmentID"
+                android:name="com.example.wheeler.ViewOrderAddCart.ChooseCarModelActivity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </LinearLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:id="@+id/navigationViewID"
+            app:menu="@menu/menu_item"
+            app:headerLayout="@layout/header"
+            android:layout_gravity="start"
+            app:itemTextAppearance="@style/menu_text_style"
+            android:theme="@style/navigation_theme"/>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationID"

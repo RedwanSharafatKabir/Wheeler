@@ -1,27 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AppActions.ChooseCarModelActivity"
+    tools:context=".ViewOrderAddCart.ChooseCarModelActivity"
     android:orientation="vertical"
-    android:background="#fff">
+    android:background="#fff"
+    android:gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#A1A1A1"
+        android:orientation="horizontal"
+        android:weightSum="9"
+        android:padding="10dp"
+        android:gravity="center">
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="7.5"
+            android:id="@+id/searchCarID"
+            android:layout_centerVertical="true"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textColor="#000000"
+            android:hint=" Search car"
+            android:imeOptions="actionSearch"
+            android:background="@drawable/searchbar_background"
+            android:textColorHint="#333333"
+            android:drawableLeft="@drawable/magnify_search"
+            android:paddingLeft="10dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/searchCarID"
+            android:layout_weight="1.5"
+            android:layout_marginLeft="5dp"
+            android:text="Search"
+            android:textAllCaps="false"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:background="@drawable/search_button_design"
+            android:textColor="#fff"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp"
-        android:orientation="vertical"
-        android:background="#fff">
+        android:background="#fff"
+        android:layout_marginTop="50dp">
+
+        <ProgressBar
+            android:id="@+id/homeProgressbarId"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewID"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"/>
+            android:orientation="horizontal"
+            android:padding="5dp"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-</LinearLayout>
+</FrameLayout>

@@ -1,5 +1,6 @@
 package com.example.wheeler.UserAuthentication;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.core.content.ContextCompat;
 
@@ -25,6 +26,7 @@ import com.example.wheeler.AppActions.MainActivity;
 import com.example.wheeler.ModelClass.StoreUserData;
 import com.example.wheeler.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
@@ -35,6 +37,10 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.santalu.maskedittext.MaskEditText;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import dmax.dialog.SpotsDialog;
 
@@ -50,6 +56,8 @@ public class SignupActivity extends AppCompatDialogFragment implements View.OnCl
     ConnectivityManager cm;
     NetworkInfo netInfo;
     boolean connected = false;
+    FirebaseAuth mAuth;
+    DatabaseReference databaseReference;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -65,6 +73,9 @@ public class SignupActivity extends AppCompatDialogFragment implements View.OnCl
                 "\nOne contact number for multiple accounts " +
                 "will remove your previous account data.");
         setCancelable(false);
+
+        mAuth = FirebaseAuth.getInstance();
+        databaseReference = FirebaseDatabase.getInstance().getReference("User Information");
 
         linearLayout = view.findViewById(R.id.first);
         close = view.findViewById(R.id.closeDialogID);
@@ -137,13 +148,18 @@ public class SignupActivity extends AppCompatDialogFragment implements View.OnCl
                     connected = true;
                     waitingDialog.dismiss();
 
-                    Intent it = new Intent(getActivity(), VerifyPhoneActivity.class);
-                    it.putExtra("emailKey", email);
-                    it.putExtra("usernameKey", username);
-                    it.putExtra("phonenumberKey", phonenumber);
-                    it.putExtra("passwordKey", password);
+                    signupWithEmail(email, username, phonenumber, password);
+                    Intent it = new Intent(getActivity(), MainActivity.class);
                     startActivity(it);
                     getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+//                    Intent it = new Intent(getActivity(), VerifyPhoneActivity.class);
+//                    it.putExtra("emailKey", email);
+//                    it.putExtra("usernameKey", username);
+//                    it.putExtra("phonenumberKey", phonenumber);
+//                    it.putExtra("passwordKey", password);
+//                    startActivity(it);
+//                    getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                     signupEmailText.setText("");
                     signupUsernameText.setText("");
@@ -163,5 +179,64 @@ public class SignupActivity extends AppCompatDialogFragment implements View.OnCl
         if(v.getId()==R.id.closeDialogID){
             getDialog().dismiss();
         }
+    }
+
+    private void signupWithEmail(String email, String username, String phonenumber, String password){
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    storeUserDataMethod(email, username, phonenumber);
+                    Toast.makeText(getActivity(), "Successfully registered", Toast.LENGTH_LONG).show();
+                    waitingDialog.dismiss();
+
+                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                Intent it = new Intent(getActivity(), MainActivity.class);
+                                startActivity(it);
+                                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            } else {
+                                waitingDialog.dismiss();
+                                Toast t = Toast.makeText(getActivity(), "Authentication failed\nError : " +
+                                        task.getException().getMessage(), Toast.LENGTH_LONG);
+                                t.setGravity(Gravity.CENTER, 0, 0);
+                                t.show();
+                            }
+                        }
+                    });
+
+                } else {
+                    if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                        waitingDialog.dismiss();
+                        Toast t = Toast.makeText(getActivity(), R.string.email_alert,
+                                Toast.LENGTH_LONG);
+                        t.setGravity(Gravity.CENTER, 0, 0);
+                        t.show();
+                    } else {
+                        waitingDialog.dismiss();
+                        Toast t = Toast.makeText(getActivity(), "Authentication failed. Error : "
+                                + "Connection lost.", Toast.LENGTH_LONG);
+                        t.setGravity(Gravity.CENTER, 0, 0);
+                        t.show();
+                    }
+                }
+            }
+        });
+    }
+
+    private void storeUserDataMethod(String email, String username, String phone){
+        String displayname = phone;
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user!=null){
+            UserProfileChangeRequest profile;
+            profile= new UserProfileChangeRequest.Builder().setDisplayName(displayname).build();
+            user.updateProfile(profile).addOnCompleteListener(task -> {});
+        }
+
+        String Key_User_Info = phone;
+        StoreUserData storeUserData = new StoreUserData(email, username, phone);
+        databaseReference.child(Key_User_Info).setValue(storeUserData);
     }
 }

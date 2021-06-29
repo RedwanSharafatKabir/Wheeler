@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewOrderAddCart.ParticularCarDetails"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#A1A1A1">
+
+        <ImageView
+            android:id="@+id/backToHomeFromParticularCarId"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:layout_gravity="center|start"
+            android:layout_marginLeft="15dp"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="10dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="5dp">
+
+                <ImageView
+                    android:id="@+id/imageUrlParticularID"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/car_showroom"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/carParticularID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Car ID:"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:fontFamily="serif-monospace"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"/>
+
+                <TextView
+                    android:id="@+id/carMakeBrandParticularID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Brand:"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="#000"
+                    android:fontFamily="serif-monospace"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/carModelParticularID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Model:"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:fontFamily="serif-monospace"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/horsePowerParticularID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Horsepower:"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textSize="18sp"
+                    android:textColor="#000"
+                    android:fontFamily="serif-monospace"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/priceParticularID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Price:"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="#F62525"
+                    android:fontFamily="serif-monospace"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/quantityParticularID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Quantity:"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="#000000"
+                    android:fontFamily="serif-monospace"
+                    android:layout_marginTop="8dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp">
+
+                    <ImageView
+                        android:id="@+id/minusID"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_baseline_minus"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/search_button_design"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/carCountID"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:text="1"
+                        android:textColor="#000"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:background="@drawable/quantity_background"/>
+
+                    <ImageView
+                        android:id="@+id/plusID"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_baseline_plus_24"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/search_button_design"
+                        android:padding="10dp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/totalAmountParticularID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Total amount:"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="#000000"
+                    android:fontFamily="serif-monospace"
+                    android:layout_marginTop="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
+
+                    <Button
+                        android:id="@+id/buyNowID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_baseline_minus"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/buy_now"
+                        android:text="Buy now"
+                        android:textColor="#fff"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"/>
+
+                    <Button
+                        android:id="@+id/addToCartID"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_baseline_minus"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/add_to_cart"
+                        android:text="Add to cart"
+                        android:textColor="#fff"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

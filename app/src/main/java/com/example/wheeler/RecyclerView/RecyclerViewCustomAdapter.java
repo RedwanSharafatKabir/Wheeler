@@ -1,6 +1,7 @@
 package com.example.wheeler.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.wheeler.AppActions.MainActivity;
 import com.example.wheeler.ModelClass.CarApiData;
 import com.example.wheeler.R;
+import com.example.wheeler.ViewOrderAddCart.ParticularCarDetails;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -44,11 +48,11 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         CarApiData carApiData = carApiDataArrayList.get(position);
 
-        holder.carIdText.setText("Car ID: " + carApiData.getId());
-        holder.horsepowerText.setText("Horsepower: " + carApiData.getHorsepower() + " hp");
-        holder.carBrandText.setText("Brand: " + carApiData.getMake());
-        holder.carModelText.setText("Model: " + carApiData.getModel());
-        holder.priceText.setText("Price: " + carApiData.getPrice() + " $");
+        holder.carIdText.setText("Car ID:" + carApiData.getId());
+        holder.horsepowerText.setText("Horsepower:" + carApiData.getHorsepower() + "hp");
+        holder.carBrandText.setText("Brand:" + carApiData.getMake());
+        holder.carModelText.setText("Model:" + carApiData.getModel());
+        holder.priceText.setText("Price:" + carApiData.getPrice() + "$");
         Picasso.get().load(carApiData.getImg_url()).into(holder.imageUrlImageView);
     }
 
@@ -76,11 +80,21 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
         @Override
         public void onClick(View v) {
             int position = getLayoutPosition();
+            String carImageUrl = carApiDataArrayList.get(position).getImg_url();
             String carId = carApiDataArrayList.get(position).getId();
-            String carBrand = carId + " " + carApiDataArrayList.get(position).getMake();
-            String carModel = carBrand + " " + carApiDataArrayList.get(position).getModel();
+            String carBrand = carApiDataArrayList.get(position).getMake();
+            String carModel = carApiDataArrayList.get(position).getModel();
+            String carHorsepower = carApiDataArrayList.get(position).getHorsepower();
+            String carPrice = carApiDataArrayList.get(position).getPrice();
 
-            Toast.makeText(context, carModel, Toast.LENGTH_SHORT).show();
+            Intent it = new Intent(context, ParticularCarDetails.class);
+            it.putExtra("carImageUrl_key", carImageUrl);
+            it.putExtra("carId_key", carId);
+            it.putExtra("carBrand_key", carBrand);
+            it.putExtra("carModel_key", carModel);
+            it.putExtra("carHorsepower_key", carHorsepower);
+            it.putExtra("carPrice_key", carPrice);
+            context.startActivity(it);
         }
     }
 }

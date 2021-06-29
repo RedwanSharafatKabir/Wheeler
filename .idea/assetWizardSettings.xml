@@ -300,7 +300,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/arrow_back/baseline_arrow_back_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/remove/baseline_remove_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -310,7 +310,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_arrow_back_24" />
+                            <entry key="outputName" value="ic_baseline_minus" />
                             <entry key="sourceFile" value="D:\Android Projects\Wheeler" />
                           </map>
                         </option>
