@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
@@ -44,7 +45,7 @@ public class SplashScreen extends AppCompatActivity {
         imageView = findViewById(R.id.splashImageID);
         imageView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoom_in_fade_in));
 
-        new Handler().postDelayed(() -> signInButton.isClickable(), SPLASH_TIME_OUT);
+        new Handler(Looper.getMainLooper()).postDelayed(() -> signInButton.isClickable(), SPLASH_TIME_OUT);
     }
 
     @Override

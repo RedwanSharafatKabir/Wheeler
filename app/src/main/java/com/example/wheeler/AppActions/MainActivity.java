@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.aboutID:
                 fragment = new AboutApp();
                 feedbackTransaction = getSupportFragmentManager().beginTransaction();
+                feedbackTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
                 feedbackTransaction.replace(R.id.fragmentID, fragment);
                 feedbackTransaction.commit();
                 break;
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     connected = true;
                     fragment = new Feedback();
                     feedbackTransaction = getSupportFragmentManager().beginTransaction();
+                    feedbackTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
                     feedbackTransaction.replace(R.id.fragmentID, fragment);
                     feedbackTransaction.commit();
                 } else {
@@ -196,6 +198,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     connected = true;
                     fragment = new ProfileAccount();
                     feedbackTransaction = getSupportFragmentManager().beginTransaction();
+                    feedbackTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
                     feedbackTransaction.replace(R.id.fragmentID, fragment);
                     feedbackTransaction.commit();
                 } else {

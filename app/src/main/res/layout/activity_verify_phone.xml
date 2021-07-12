@@ -108,25 +108,34 @@
                     android:onClick="resendOtpButtonMethod"/>
             </FrameLayout>
 
-            <Button
-                android:id="@+id/submitOtpID"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardElevation="5dp"
+                app:cardCornerRadius="5dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="40dp"
-                android:clickable="true"
-                android:text="Verify"
-                android:background="@drawable/button_background"
-                android:textColor="#ffffff"
-                android:textAllCaps="true"
-                android:fontFamily="sans-serif"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:paddingRight="15dp"
-                android:paddingLeft="15dp"
                 android:layout_marginRight="25dp"
-                android:layout_marginLeft="25dp"
-                android:onClick="submitOtpMethod"/>
+                android:layout_marginLeft="25dp">
+
+                <Button
+                    android:id="@+id/submitOtpID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:clickable="true"
+                    android:text="Verify"
+                    android:background="#DD171717"
+                    android:textColor="#ffffff"
+                    android:textAllCaps="true"
+                    android:fontFamily="sans-serif"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:paddingRight="15dp"
+                    android:paddingLeft="15dp"
+                    android:onClick="submitOtpMethod"/>
+
+            </androidx.cardview.widget.CardView>
 
             <ProgressBar
                 android:id="@+id/verificationProgressBarID"

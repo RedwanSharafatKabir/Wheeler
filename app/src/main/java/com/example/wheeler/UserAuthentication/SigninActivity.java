@@ -46,10 +46,9 @@ public class SigninActivity extends AppCompatDialogFragment implements View.OnCl
     View view;
     FirebaseAuth mAuth;
     AlertDialog waitingDialog;
-    MaskEditText signinPhoneText;
+    EditText signinPhoneText, signinpasswordText;
     CheckBox checkBox;
     Animation fromTop, fromBottom;
-    EditText signinpasswordText;
     ImageButton signinButton;
     LinearLayout linearLayoutID;
     Button close, forgetPass;
@@ -100,13 +99,13 @@ public class SigninActivity extends AppCompatDialogFragment implements View.OnCl
             waitingDialog.show();
 
             if (phoneObj.isEmpty()) {
-                signinPhoneText.setError("Please enter email address");
+                signinPhoneText.setError("Please enter phone number");
                 waitingDialog.dismiss();
                 return;
             }
 
             if (passObj.isEmpty()) {
-                signinpasswordText.setError("Please enter phone number");
+                signinpasswordText.setError("Please enter password");
                 waitingDialog.dismiss();
                 return;
             }
@@ -237,7 +236,7 @@ public class SigninActivity extends AppCompatDialogFragment implements View.OnCl
         }
     }
 
-    public void rememberMethod(String passedString){
+    private void rememberMethod(String passedString){
         try {
             FileOutputStream fileOutputStream = getContext().openFileOutput("Personal_Info.txt", Context.MODE_PRIVATE);
             fileOutputStream.write(passedString.getBytes());
@@ -252,7 +251,7 @@ public class SigninActivity extends AppCompatDialogFragment implements View.OnCl
         }
     }
 
-    public void setNullDataMethod(String passedString){
+    private void setNullDataMethod(String passedString){
         try {
             FileOutputStream fileOutputStream = getContext().openFileOutput("Personal_Info.txt", Context.MODE_PRIVATE);
             fileOutputStream.write(passedString.getBytes());

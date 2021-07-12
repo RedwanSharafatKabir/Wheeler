@@ -30,13 +30,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="10dp">
+            android:gravity="center">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                app:cardElevation="0dp"
+                app:cardUseCompatPadding="true"
+                app:cardElevation="5dp"
                 app:cardCornerRadius="5dp">
 
                 <ImageView
@@ -140,36 +140,65 @@
                     android:gravity="center"
                     android:layout_marginTop="8dp">
 
-                    <ImageView
-                        android:id="@+id/minusID"
+                    <androidx.cardview.widget.CardView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_baseline_minus"
+                        app:cardCornerRadius="5dp"
+                        android:layout_gravity="center"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/search_button_design"
-                        android:padding="10dp"/>
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp">
 
-                    <TextView
-                        android:id="@+id/carCountID"
+                        <ImageView
+                            android:id="@+id/minusID"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_baseline_minus"
+                            android:background="#DD333333"
+                            android:padding="10dp"
+                            android:layout_gravity="center" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="100dp"
                         android:layout_height="40dp"
-                        android:text="1"
-                        android:textColor="#000"
-                        android:gravity="center"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:background="@drawable/quantity_background"/>
+                        app:cardCornerRadius="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp">
 
-                    <ImageView
-                        android:id="@+id/plusID"
+                        <TextView
+                            android:id="@+id/carCountID"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="1"
+                            android:textColor="#000"
+                            android:gravity="center"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:background="#D3D3D3"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/ic_baseline_plus_24"
+                        app:cardCornerRadius="5dp"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/search_button_design"
-                        android:padding="10dp"/>
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp">
+
+                        <ImageView
+                            android:id="@+id/plusID"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_baseline_plus_24"
+                            android:background="#DD333333"
+                            android:padding="10dp"/>
+
+                    </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
 
@@ -191,35 +220,53 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp">
+                    android:layout_marginTop="20dp">
 
-                    <Button
-                        android:id="@+id/buyNowID"
+                    <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_baseline_minus"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="5dp"
                         android:layout_marginRight="10dp"
-                        android:background="@drawable/buy_now"
-                        android:text="Buy now"
-                        android:textColor="#fff"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textAllCaps="false"/>
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp">
 
-                    <Button
-                        android:id="@+id/addToCartID"
+                        <Button
+                            android:id="@+id/buyNowID"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_baseline_minus"
+                            android:background="#E44428"
+                            android:text="Buy now"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:src="@drawable/ic_baseline_minus"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="5dp"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/add_to_cart"
-                        android:text="Add to cart"
-                        android:textColor="#fff"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:textAllCaps="false"/>
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp">
+
+                        <Button
+                            android:id="@+id/addToCartID"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_baseline_minus"
+                            android:background="@color/colorPrimary"
+                            android:text="Add to cart"
+                            android:textColor="#fff"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"/>
+
+                    </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
 

@@ -22,19 +22,6 @@
             android:layout_gravity="center"
             android:paddingBottom="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Wheeler"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textSize="30sp"
-                android:textColor="#000000"
-                android:textAllCaps="true"
-                android:fontFamily="sans-serif"
-                android:textStyle="bold"
-                android:layout_marginBottom="20dp" />
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/splashImageID"
                 android:layout_width="match_parent"
@@ -50,22 +37,31 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_gravity="center"
-                android:padding="10dp">
+                android:padding="5dp">
 
-                <Button
-                    android:id="@+id/signinPageID"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/customize_login_signup_background"
-                    android:text="Sign in"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:textAllCaps="true"
-                    android:fontFamily="sans-serif"
-                    android:textStyle="bold"
-                    android:onClick="signInBtnMethod"
-                    android:clickable="false"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
+                    app:cardElevation="5dp"
+                    app:cardCornerRadius="5dp"
+                    android:layout_gravity="center">
+
+                    <Button
+                        android:id="@+id/signinPageID"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:background="#DD171717"
+                        android:text="Sign in"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textAllCaps="true"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="bold"
+                        android:onClick="signInBtnMethod"
+                        android:clickable="false"/>
+
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -80,19 +76,29 @@
                     android:fontFamily="sans-serif"
                     android:layout_marginBottom="5dp"/>
 
-                <Button
-                    android:id="@+id/signupPageID"
-                    android:layout_width="120dp"
-                    android:layout_height="wrap_content"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
+                    app:cardElevation="5dp"
+                    app:cardCornerRadius="5dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/custom_homescreen_register"
-                    android:text="Join now"
-                    android:textColor="#000000"
-                    android:textSize="18sp"
-                    android:textAllCaps="true"
-                    android:fontFamily="sans-serif"
-                    android:textStyle="bold"
-                    android:onClick="joinNowBtnMethod"/>
+                    android:layout_marginBottom="8dp">
+
+                    <Button
+                        android:id="@+id/signupPageID"
+                        android:layout_width="90dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:background="#DADADA"
+                        android:text="Join now"
+                        android:textColor="#000000"
+                        android:textSize="14sp"
+                        android:textAllCaps="true"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="bold"
+                        android:onClick="joinNowBtnMethod"/>
+
+                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 

@@ -10,6 +10,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ChooseCarModelActivity extends Fragment {
 
+    Parcelable recyclerViewState;
     View views, parentLayout;
     String brandNameContent = "", brandImageContent = "";
     public RecyclerView recyclerView;
@@ -64,6 +66,13 @@ public class ChooseCarModelActivity extends Fragment {
         recyclerView = views.findViewById(R.id.recyclerViewID);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerViewCustomAdapter = new RecyclerViewCustomAdapter(getContext(), carApiDataList);
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
+            }
+        });
 
         parentLayout = views.findViewById(android.R.id.content);
         cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -91,6 +100,7 @@ public class ChooseCarModelActivity extends Fragment {
                     recyclerViewCustomAdapter.setData(dataList);
                     recyclerView.setAdapter(recyclerViewCustomAdapter);
                     recyclerViewCustomAdapter.notifyDataSetChanged();
+                    recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
 
                     progressBar.setVisibility(View.GONE);
 

@@ -12,6 +12,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,27 +26,35 @@
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:orientation="vertical"
-                android:gravity="center">
+                android:gravity="center"
+                android:layout_marginLeft="10dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profileActivityPicID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:src="@drawable/ic_profile_image_24"
                     android:clickable="true"/>
 
-                <ImageView
-                    android:id="@+id/uploadProfilePictureID"
+                <androidx.cardview.widget.CardView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_baseline_edit_24"
-                    android:layout_gravity="end|bottom"
-                    android:background="@drawable/white_circle_shape"
-                    android:padding="5dp"
+                    app:cardCornerRadius="10dp"
                     android:layout_marginTop="-32dp"
-                    android:clickable="true"/>
+                    android:layout_gravity="end|bottom">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/uploadProfilePictureID"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_baseline_edit_24"
+                        android:background="#B4BABA"
+                        android:padding="5dp"
+                        android:clickable="true"/>
+
+                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 
@@ -57,53 +66,80 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp">
 
-                    <TextView
-                        android:id="@+id/profileActivityNameID"
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:textSize="16sp"
-                        android:fontFamily="serif"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:drawableLeft="@drawable/one_person_username"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="5dp"
                         android:layout_marginTop="20dp"
-                        android:inputType="text"
-                        android:layout_gravity="left"
-                        android:background="@drawable/searchbar_background"
-                        android:padding="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp">
 
-                    <TextView
-                        android:id="@+id/profileActivityEmailID"
-                        android:layout_width="match_parent"
-                        android:textSize="16sp"
-                        android:fontFamily="serif"
-                        android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:layout_marginTop="20dp"
-                        android:drawableLeft="@drawable/ic_email_black_24dp"
-                        android:layout_gravity="left"
-                        android:background="@drawable/searchbar_background"
-                        android:padding="10dp"/>
+                        <TextView
+                            android:id="@+id/profileActivityNameID"
+                            android:layout_width="match_parent"
+                            android:textSize="16sp"
+                            android:fontFamily="serif"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000000"
+                            android:drawableLeft="@drawable/one_person_username"
+                            android:layout_gravity="left"
+                            android:background="#fff"
+                            android:padding="10dp"/>
 
-                    <TextView
-                        android:id="@+id/profileActivityPhoneID"
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:textSize="16sp"
-                        android:fontFamily="serif"
                         android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:drawableLeft="@drawable/ic_phone_black_24dp"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="5dp"
                         android:layout_marginTop="20dp"
-                        android:layout_gravity="left"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp">
+
+                        <TextView
+                            android:id="@+id/profileActivityEmailID"
+                            android:layout_width="match_parent"
+                            android:textSize="16sp"
+                            android:fontFamily="serif"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000000"
+                            android:drawableLeft="@drawable/ic_email_black_24dp"
+                            android:layout_gravity="left"
+                            android:background="#fff"
+                            android:padding="10dp"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="5dp"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginBottom="10dp"
-                        android:background="@drawable/searchbar_background"
-                        android:padding="10dp"/>
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp">
+
+                        <TextView
+                            android:id="@+id/profileActivityPhoneID"
+                            android:layout_width="match_parent"
+                            android:textSize="16sp"
+                            android:fontFamily="serif"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000000"
+                            android:drawableLeft="@drawable/ic_phone_black_24dp"
+                            android:layout_gravity="left"
+                            android:background="#fff"
+                            android:padding="10dp"/>
+
+                    </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
 

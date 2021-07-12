@@ -46,9 +46,8 @@ import dmax.dialog.SpotsDialog;
 
 public class SignupActivity extends AppCompatDialogFragment implements View.OnClickListener {
 
-    MaskEditText signupPhoneText;
     Animation fromTop, fromBottom;
-    EditText signupEmailText, signupUsernameText, signupPasswordText;
+    EditText signupEmailText, signupUsernameText, signupPasswordText, signupPhoneText;
     ImageButton signupButton;
     LinearLayout linearLayout;
     Button close;
@@ -146,12 +145,8 @@ public class SignupActivity extends AppCompatDialogFragment implements View.OnCl
             else {
                 if (netInfo != null && netInfo.isConnectedOrConnecting()) {
                     connected = true;
-                    waitingDialog.dismiss();
 
                     signupWithEmail(email, username, phonenumber, password);
-                    Intent it = new Intent(getActivity(), MainActivity.class);
-                    startActivity(it);
-                    getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
 //                    Intent it = new Intent(getActivity(), VerifyPhoneActivity.class);
 //                    it.putExtra("emailKey", email);

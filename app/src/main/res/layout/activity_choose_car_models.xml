@@ -19,35 +19,51 @@
         android:padding="10dp"
         android:gravity="center">
 
-        <AutoCompleteTextView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="7.5"
-            android:id="@+id/searchCarID"
-            android:layout_centerVertical="true"
-            android:textAllCaps="false"
-            android:textSize="14sp"
-            android:textColor="#000000"
-            android:hint=" Search car"
-            android:imeOptions="actionSearch"
-            android:background="@drawable/searchbar_background"
-            android:textColorHint="#333333"
-            android:drawableLeft="@drawable/magnify_search"
-            android:paddingLeft="10dp"/>
+            app:cardCornerRadius="5dp"
+            android:layout_gravity="center">
 
-        <Button
+            <AutoCompleteTextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/searchCarID"
+                android:layout_centerVertical="true"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textColor="#000000"
+                android:hint=" Search car"
+                android:imeOptions="actionSearch"
+                android:background="#ffffff"
+                android:textColorHint="#333333"
+                android:drawableLeft="@drawable/magnify_search"
+                android:paddingLeft="10dp"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/searchCarID"
             android:layout_weight="1.5"
-            android:layout_marginLeft="5dp"
-            android:text="Search"
-            android:textAllCaps="false"
-            android:textAlignment="center"
-            android:textSize="14sp"
-            android:background="@drawable/search_button_design"
-            android:textColor="#fff"
-            android:textStyle="bold" />
+            app:cardCornerRadius="5dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/searchCarID"
+                android:text="Search"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:background="#DD333333"
+                android:textColor="#fff"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
@@ -66,9 +82,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewID"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="5dp"/>
+            android:layout_height="match_parent"/>
 
     </RelativeLayout>
 
