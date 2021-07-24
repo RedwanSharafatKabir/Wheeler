@@ -1,15 +1,16 @@
 package com.example.wheeler.ViewOrderAddCart;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,9 +22,6 @@ import com.example.wheeler.Api_Inteface.CarApiClient;
 import com.example.wheeler.ModelClass.CarApiData;
 import com.example.wheeler.R;
 import com.example.wheeler.RecyclerView.RecyclerViewCustomAdapter;
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -47,7 +45,6 @@ public class ChooseCarModelActivity extends Fragment {
     ProgressBar progressBar;
     ConnectivityManager cm;
     NetworkInfo netInfo;
-    Snackbar snackbar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,11 +77,8 @@ public class ChooseCarModelActivity extends Fragment {
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
             getDataFromApi();
         } else {
-            snackbar = Snackbar.make(parentLayout, "Turn on internet connection", Snackbar.LENGTH_LONG);
-            View sbView = snackbar.getView();
-            sbView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.Red));
-            snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
-            snackbar.setDuration(10000).show();
+            Toast.makeText(getActivity(), "Turn on internet connection", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.GONE);
         }
 
         return views;
@@ -125,6 +119,7 @@ public class ChooseCarModelActivity extends Fragment {
 //                    recyclerViewCustomAdapter.setData(carApiDataList);
 //                    recyclerView.setAdapter(recyclerViewCustomAdapter);
 //                    recyclerViewCustomAdapter.notifyDataSetChanged();
+
                 }
             }
 

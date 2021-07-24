@@ -63,7 +63,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="22dp"
                 android:layout_marginLeft="22dp">
-                <com.santalu.maskedittext.MaskEditText
+
+                <EditText
                     android:id="@+id/otpInputID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,6 +72,7 @@
                     android:inputType="number"
                     android:textColor="#000000"
                     android:textColorHint="#000000"/>
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <FrameLayout

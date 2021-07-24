@@ -33,12 +33,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.santalu.maskedittext.MaskEditText;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
 import dmax.dialog.SpotsDialog;
 
 public class SigninActivity extends AppCompatDialogFragment implements View.OnClickListener {

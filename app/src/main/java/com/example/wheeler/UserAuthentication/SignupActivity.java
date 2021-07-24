@@ -3,7 +3,6 @@ package com.example.wheeler.UserAuthentication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.core.content.ContextCompat;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -21,7 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.example.wheeler.AppActions.MainActivity;
 import com.example.wheeler.ModelClass.StoreUserData;
 import com.example.wheeler.R;
@@ -36,12 +34,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.santalu.maskedittext.MaskEditText;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import dmax.dialog.SpotsDialog;
 
 public class SignupActivity extends AppCompatDialogFragment implements View.OnClickListener {

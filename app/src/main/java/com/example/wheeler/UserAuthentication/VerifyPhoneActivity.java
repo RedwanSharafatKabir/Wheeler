@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,6 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.santalu.maskedittext.MaskEditText;
 import org.jetbrains.annotations.NotNull;
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +44,7 @@ public class VerifyPhoneActivity extends AppCompatActivity {
 
     String email, username, phonenumber, password;
     TextView setPhone;
-    MaskEditText enterOtp;
+    EditText enterOtp;
     ProgressBar progressBar;
     ConnectivityManager cm;
     NetworkInfo netInfo;

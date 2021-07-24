@@ -24,7 +24,7 @@
             <LinearLayout
                 android:id="@+id/menuID"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:orientation="horizontal"
                 android:background="#A1A1A1">
 

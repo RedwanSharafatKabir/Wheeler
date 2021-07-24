@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.wheeler.R;
 import com.example.wheeler.ViewOrderAddCart.ChooseCarModelActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
@@ -36,7 +37,7 @@ import com.sslwireless.sslcommerzlibrary.model.util.SSLCSdkType;
 import com.sslwireless.sslcommerzlibrary.view.singleton.IntegrateSSLCommerz;
 import com.sslwireless.sslcommerzlibrary.viewmodel.listener.SSLCTransactionResponseListener;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener,
         NavigationView.OnNavigationItemSelectedListener, SSLCTransactionResponseListener {
 
     BottomNavigationView bottomNavigationView;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         hView = navigationView.getHeaderView(0);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationID);
-        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setOnItemSelectedListener(MainActivity.this);
 
         parentLayout = findViewById(android.R.id.content);
     }
