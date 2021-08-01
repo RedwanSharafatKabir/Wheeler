@@ -10,16 +10,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wheeler.AppActions.MainActivity;
+import com.example.wheeler.ModelClass.StoreCartList;
 import com.example.wheeler.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class ParticularCarDetails extends AppCompatActivity implements View.OnClickListener{
 
     ImageView imageView, backToHome, minus, plus;
-    String carImageUrl, carId, carBrand, carModel, carHorsepower, carPrice;
+    String carImageUrl, carId, carBrand, carModel, carHorsepower, carPrice, userPhone, measuredPrice;
     TextView carIdText, carBrandText, carModelText, carHorsepowerText, carPriceText, totalPrice, count;
     Button buyNow, addToCart;
     int countCarNumber = 1;
+    DatabaseReference orderBuyReference, cartReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +66,11 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
         carModelText.setText("Model: " + carModel);
         carHorsepowerText.setText("Horsepower: " + carHorsepower + " hp");
         carPriceText.setText("Price: " + carPrice + " $");
-
         totalPrice.setText("Total amount: " + carPrice + " $");
+
+        userPhone = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        orderBuyReference = FirebaseDatabase.getInstance().getReference("Order and Buy Information");
+        cartReference = FirebaseDatabase.getInstance().getReference("Cart Information");
     }
 
     @Override
@@ -79,7 +87,8 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
             count.setText(Integer.toString(countCarNumber));
             Double perPiecePrice = Double.parseDouble(carPrice);
             Double finalPrice = countCarNumber * perPiecePrice;
-            totalPrice.setText("Total amount: " + finalPrice + " $");
+            measuredPrice = String.valueOf(finalPrice);
+            totalPrice.setText("Total amount: " + measuredPrice + " $");
         }
 
         if(v.getId()==R.id.minusID){
@@ -91,8 +100,26 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
             count.setText(Integer.toString(countCarNumber));
             Double perPiecePrice = Double.parseDouble(carPrice);
             Double finalPrice = countCarNumber * perPiecePrice;
-            totalPrice.setText("Total amount: " + finalPrice + " $");
+            measuredPrice = String.valueOf(finalPrice);
+            totalPrice.setText("Total amount: " + measuredPrice + " $");
         }
+
+        if(v.getId()==R.id.buyNowID){
+
+        }
+
+        if(v.getId()==R.id.addToCartID){
+            storeToCartList(carId, carBrand, carModel, carHorsepower, countCarNumber, measuredPrice);
+        }
+    }
+
+    private void storeToCartList(String carId, String carBrand, String carModel,
+                                 String carHorsepower, int quantity, String carFinalPrice){
+
+        StoreCartList storeCartList = new StoreCartList(carId, carBrand, carModel, carHorsepower, quantity, carFinalPrice);
+        cartReference.child(userPhone).setValue(storeCartList);
+
+        Toast.makeText(ParticularCarDetails.this, "Car added to cart", Toast.LENGTH_SHORT).show();
     }
 
     @Override
