@@ -16,12 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".ViewOrderAddCart.ParticularCarDetails"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".ViewOrderAddCart.CartListActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ViewOrderAddCart.ParticularCarDetails"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".UserAuthentication.VerifyPhoneActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".UserAuthentication.SignupActivity"
             android:screenOrientation="portrait"

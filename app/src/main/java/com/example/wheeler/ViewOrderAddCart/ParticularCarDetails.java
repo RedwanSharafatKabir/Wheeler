@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ParticularCarDetails extends AppCompatActivity implements View.OnClickListener{
 
     ImageView imageView, backToHome, minus, plus;
@@ -24,6 +26,8 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
     TextView carIdText, carBrandText, carModelText, carHorsepowerText, carPriceText, totalPrice, count;
     Button buyNow, addToCart;
     int countCarNumber = 1;
+    CircleImageView cartFloatingBtn;
+    TextView countCartRedText;
     DatabaseReference orderBuyReference, cartReference;
 
     @Override
@@ -35,6 +39,10 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
         backToHome.setOnClickListener(this);
         imageView = findViewById(R.id.imageUrlParticularID);
 
+        cartFloatingBtn = findViewById(R.id.cartFloatingBtnId);
+        cartFloatingBtn.setOnClickListener(this);
+        countCartRedText = findViewById(R.id.countCartItemsId);
+        countCartRedText.setOnClickListener(this);
         minus = findViewById(R.id.minusID);
         minus.setOnClickListener(this);
         plus = findViewById(R.id.plusID);
@@ -104,12 +112,25 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
             totalPrice.setText("Total amount: " + measuredPrice + " $");
         }
 
+        if(v.getId()==R.id.addToCartID){
+            storeToCartList(carId, carBrand, carModel, carHorsepower, countCarNumber, measuredPrice);
+        }
+
         if(v.getId()==R.id.buyNowID){
 
         }
 
-        if(v.getId()==R.id.addToCartID){
-            storeToCartList(carId, carBrand, carModel, carHorsepower, countCarNumber, measuredPrice);
+        if(v.getId()==R.id.cartFloatingBtnId || v.getId()==R.id.countCartItemsId){
+            finish();
+            Intent intent = new Intent(ParticularCarDetails.this, CartListActivity.class);
+            intent.putExtra("cart_key", "ParticularCarDetails");
+            intent.putExtra("carImageUrl_key", carImageUrl);
+            intent.putExtra("carId_key", carId);
+            intent.putExtra("carBrand_key", carBrand);
+            intent.putExtra("carModel_key", carModel);
+            intent.putExtra("carHorsepower_key", carHorsepower);
+            intent.putExtra("carPrice_key", carPrice);
+            startActivity(intent);
         }
     }
 
@@ -117,7 +138,7 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
                                  String carHorsepower, int quantity, String carFinalPrice){
 
         StoreCartList storeCartList = new StoreCartList(carId, carBrand, carModel, carHorsepower, quantity, carFinalPrice);
-        cartReference.child(userPhone).setValue(storeCartList);
+        cartReference.child(userPhone).child(carId).setValue(storeCartList);
 
         Toast.makeText(ParticularCarDetails.this, "Car added to cart", Toast.LENGTH_SHORT).show();
     }

@@ -20,7 +20,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import com.example.wheeler.R;
+import com.example.wheeler.ViewOrderAddCart.CartListActivity;
 import com.example.wheeler.ViewOrderAddCart.ChooseCarModelActivity;
+import com.example.wheeler.ViewOrderAddCart.ParticularCarDetails;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
@@ -57,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         drawerLayout = findViewById(R.id.drawerID);
@@ -182,8 +183,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             case R.id.cartID:
                 if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                    connected = true;
-                    Toast.makeText(this, "Cart List Fragment", Toast.LENGTH_SHORT).show();
+                    finish();
+                    Intent intent = new Intent(MainActivity.this, CartListActivity.class);
+                    intent.putExtra("cart_key", "MainActivity");
+                    startActivity(intent);
                 } else {
                     connected = false;
                     snackbar = Snackbar.make(parentLayout, "Turn on internet connection", Snackbar.LENGTH_LONG);
