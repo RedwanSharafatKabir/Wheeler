@@ -48,7 +48,6 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         CarApiData carApiData = carApiDataArrayList.get(position);
 
-        holder.carIdText.setText("Car ID:" + carApiData.getId());
         holder.horsepowerText.setText("Horsepower:" + carApiData.getHorsepower() + "hp");
         holder.carBrandText.setText("Brand:" + carApiData.getMake());
         holder.carModelText.setText("Model:" + carApiData.getModel());
@@ -63,11 +62,10 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public ImageView imageUrlImageView;
-        public TextView carIdText, carBrandText, carModelText, horsepowerText, priceText;
+        public TextView carBrandText, carModelText, horsepowerText, priceText;
 
         public RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
-            carIdText = itemView.findViewById(R.id.carID);
             horsepowerText = itemView.findViewById(R.id.horsePowerID);
             carBrandText = itemView.findViewById(R.id.carMakeBrandID);
             carModelText = itemView.findViewById(R.id.carModelID);
@@ -94,6 +92,8 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
             it.putExtra("carModel_key", carModel);
             it.putExtra("carHorsepower_key", carHorsepower);
             it.putExtra("carPrice_key", carPrice);
+            it.putExtra("carQuantity_key", "No Data");
+            it.putExtra("carCost_key", "No Data");
             context.startActivity(it);
         }
     }

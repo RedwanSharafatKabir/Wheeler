@@ -1,29 +1,55 @@
 package com.example.wheeler.ViewOrderAddCart;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.wheeler.AppActions.MainActivity;
+import com.example.wheeler.ModelClass.StoreCartList;
 import com.example.wheeler.R;
+import com.example.wheeler.RecyclerView.CartListCustomAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class CartListActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView backFromCartListBtn;
     private String cartString = "";
     String carImageUrl, carId, carBrand, carModel, carHorsepower, carPrice;
+    RecyclerView recyclerView;
+    Parcelable recyclerViewState;
+    ConnectivityManager cm;
+    NetworkInfo netInfo;
+    ProgressBar progressBar;
+    ArrayList<StoreCartList> storeCartListArrayList;
+    CartListCustomAdapter cartListCustomAdapter;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart_list);
 
-        backFromCartListBtn = findViewById(R.id.backFromCartListId);
-        backFromCartListBtn.setOnClickListener(this);
+        cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        netInfo = cm.getActiveNetworkInfo();
 
         Intent intent = getIntent();
         cartString = intent.getStringExtra("cart_key");
@@ -33,6 +59,52 @@ public class CartListActivity extends AppCompatActivity implements View.OnClickL
         carModel = intent.getStringExtra("carModel_key");
         carHorsepower = intent.getStringExtra("carHorsepower_key");
         carPrice = intent.getStringExtra("carPrice_key");
+
+        progressBar = findViewById(R.id.cartProgressBarId);
+        backFromCartListBtn = findViewById(R.id.backFromCartListId);
+        backFromCartListBtn.setOnClickListener(this);
+
+        recyclerView = findViewById(R.id.cartRecyclerViewId);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();
+            }
+        });
+
+        storeCartListArrayList = new ArrayList<StoreCartList>();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Cart Information");
+
+        loadCartList();
+    }
+
+    private void loadCartList(){
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                storeCartListArrayList.clear();
+                for (DataSnapshot item : dataSnapshot.getChildren()) {
+                    for (DataSnapshot snapshot : item.getChildren()) {
+                        StoreCartList storeCartList = snapshot.getValue(StoreCartList.class);
+                        storeCartListArrayList.add(storeCartList);
+                    }
+                }
+
+                cartListCustomAdapter = new CartListCustomAdapter(CartListActivity.this, storeCartListArrayList);
+                recyclerView.setAdapter(cartListCustomAdapter);
+                cartListCustomAdapter.notifyDataSetChanged();
+                recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);
+
+                progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                progressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override
@@ -53,6 +125,8 @@ public class CartListActivity extends AppCompatActivity implements View.OnClickL
                 intent.putExtra("carModel_key", carModel);
                 intent.putExtra("carHorsepower_key", carHorsepower);
                 intent.putExtra("carPrice_key", carPrice);
+                intent.putExtra("carQuantity_key", "No Data");
+                intent.putExtra("carCost_key", "No Data");
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
@@ -76,6 +150,8 @@ public class CartListActivity extends AppCompatActivity implements View.OnClickL
             intent.putExtra("carModel_key", carModel);
             intent.putExtra("carHorsepower_key", carHorsepower);
             intent.putExtra("carPrice_key", carPrice);
+            intent.putExtra("carQuantity_key", "No Data");
+            intent.putExtra("carCost_key", "No Data");
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }

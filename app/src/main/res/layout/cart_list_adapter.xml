@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent">
@@ -11,26 +11,23 @@
         android:id="@+id/media_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="8dp"
-        app:cardCornerRadius="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="10dp">
+        app:cardElevation="5dp"
+        android:layout_margin="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:background="#C8E5EDE6"
-            android:paddingBottom="10dp">
+            android:weightSum="10">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="150dp"
-                app:cardElevation="0dp">
+                android:layout_weight="5">
 
                 <ImageView
-                    android:id="@+id/imageUrlID"
+                    android:id="@+id/imageAdapterID"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
@@ -39,13 +36,15 @@
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="5"
                 android:orientation="vertical"
-                android:background="@android:color/transparent">
+                android:background="@android:color/transparent"
+                android:gravity="center|end">
 
                 <TextView
-                    android:id="@+id/carMakeBrandID"
+                    android:id="@+id/carMakeBrandAdapterID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Brand:"
@@ -53,12 +52,11 @@
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp"
                     android:textColor="#000"
                     android:fontFamily="serif-monospace"/>
 
                 <TextView
-                    android:id="@+id/carModelID"
+                    android:id="@+id/carModelAdapterID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Model:"
@@ -70,7 +68,7 @@
                     android:fontFamily="serif-monospace"/>
 
                 <TextView
-                    android:id="@+id/horsePowerID"
+                    android:id="@+id/horsePowerAdapterID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Horsepower:"
@@ -82,16 +80,37 @@
                     android:fontFamily="serif-monospace"/>
 
                 <TextView
-                    android:id="@+id/priceID"
+                    android:id="@+id/quantityAdapterID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Price:"
+                    android:text="Quanity:"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textColor="#000000"
+                    android:fontFamily="serif-monospace"/>
+
+                <TextView
+                    android:id="@+id/priceAdapterID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cost:"
                     android:textStyle="bold"
                     android:textSize="16dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:textColor="#F62525"
                     android:fontFamily="serif-monospace"/>
+
+                <ImageView
+                    android:id="@+id/deleteItemBtnId"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/trash"
+                    android:layout_marginRight="10dp"
+                    android:layout_gravity="end"/>
+
             </LinearLayout>
 
         </LinearLayout>

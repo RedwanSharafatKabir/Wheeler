@@ -7,17 +7,22 @@ public class StoreCartList {
     private String carHorsepower;
     private int quantity;
     private String carFinalPrice;
+    private String carSinglePrice;
+    private String carImageUrl;
 
     public StoreCartList() {
     }
 
-    public StoreCartList(String carId, String carBrand, String carModel, String carHorsepower, int quantity, String carFinalPrice) {
+    public StoreCartList(String carId, String carBrand, String carModel, String carHorsepower,
+                         int quantity, String carFinalPrice, String carSinglePrice, String carImageUrl) {
         this.carId = carId;
         this.carBrand = carBrand;
         this.carModel = carModel;
         this.carHorsepower = carHorsepower;
         this.quantity = quantity;
         this.carFinalPrice = carFinalPrice;
+        this.carSinglePrice = carSinglePrice;
+        this.carImageUrl = carImageUrl;
     }
 
     public String getCarId() {
@@ -66,5 +71,21 @@ public class StoreCartList {
 
     public void setCarFinalPrice(String carFinalPrice) {
         this.carFinalPrice = carFinalPrice;
+    }
+
+    public String getCarSinglePrice() {
+        return carSinglePrice;
+    }
+
+    public void setCarSinglePrice(String carSinglePrice) {
+        this.carSinglePrice = carSinglePrice;
+    }
+
+    public String getCarImageUrl() {
+        return carImageUrl;
+    }
+
+    public void setCarImageUrl(String carImageUrl) {
+        this.carImageUrl = carImageUrl;
     }
 }
