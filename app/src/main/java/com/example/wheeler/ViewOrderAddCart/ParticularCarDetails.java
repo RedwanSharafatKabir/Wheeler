@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ParticularCarDetails extends AppCompatActivity implements View.OnClickListener{
 
+    ProgressBar progressBar;
     ImageView imageView, backToHome, minus, plus;
     String carImageUrl, carId, carBrand, carModel, carHorsepower, carPrice, userPhone, measuredPrice, totalPriceFromCart, quantityFromCart;
     TextView carIdText, carBrandText, carModelText, carHorsepowerText, carPriceText, totalPrice, count;
@@ -50,6 +52,11 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_particular_car_details);
 
+        userPhone = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        orderBuyReference = FirebaseDatabase.getInstance().getReference("Order and Buy Information");
+        cartReference = FirebaseDatabase.getInstance().getReference("Cart Information");
+
+        progressBar = findViewById(R.id.particularCarProgressBarId);
         cardView1 = findViewById(R.id.cardViewId1);
         cardView2 = findViewById(R.id.cardViewId2);
         backToHome = findViewById(R.id.backToHomeFromParticularCarId);
@@ -87,30 +94,57 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
         carModel = it.getStringExtra("carModel_key");
         carHorsepower = it.getStringExtra("carHorsepower_key");
         carPrice = it.getStringExtra("carPrice_key");
-        quantityFromCart = it.getStringExtra("carQuantity_key");
-        totalPriceFromCart = it.getStringExtra("carCost_key");
 
         Picasso.get().load(carImageUrl).into(imageView);
-        carIdText.setText("Car ID: " + carId);
-        carBrandText.setText("Brand: " + carBrand);
-        carModelText.setText("Model: " + carModel);
-        carHorsepowerText.setText("Horsepower: " + carHorsepower + " hp");
-        carPriceText.setText("Price: " + carPrice + " $");
-
-        if(totalPriceFromCart.equals("No Data")) {
-            cardView1.setVisibility(View.VISIBLE);
-            totalPrice.setText("Total amount: " + carPrice + " $");
-        } else {
-            cardView2.setVisibility(View.VISIBLE);
-            totalPrice.setText("Total amount: " + totalPriceFromCart + " $");
-            count.setText(quantityFromCart);
-        }
-
-        userPhone = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
-        orderBuyReference = FirebaseDatabase.getInstance().getReference("Order and Buy Information");
-        cartReference = FirebaseDatabase.getInstance().getReference("Cart Information");
-
+        setCartItemValue();
         checkCartItems();
+    }
+
+    private void setCartItemValue(){
+        cartReference.child(userPhone).child(carId).child("quantity").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                try {
+                    quantityFromCart = snapshot.getValue().toString();
+                    count.setText(quantityFromCart);
+
+                    cartReference.child(userPhone).child(carId).child("carFinalPrice").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            totalPriceFromCart = snapshot.getValue().toString();
+
+                            carIdText.setText("Car ID: " + carId);
+                            carBrandText.setText("Brand: " + carBrand);
+                            carModelText.setText("Model: " + carModel);
+                            carHorsepowerText.setText("Horsepower: " + carHorsepower + " hp");
+                            carPriceText.setText("Price: " + carPrice + " $");
+                            totalPrice.setText("Total amount: " + totalPriceFromCart + " $");
+
+                            cardView2.setVisibility(View.VISIBLE);
+                            progressBar.setVisibility(View.GONE);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+
+                } catch (Exception e) {
+                    carIdText.setText("Car ID: " + carId);
+                    carBrandText.setText("Brand: " + carBrand);
+                    carModelText.setText("Model: " + carModel);
+                    carHorsepowerText.setText("Horsepower: " + carHorsepower + " hp");
+                    carPriceText.setText("Price: " + carPrice + " $");
+                    totalPrice.setText("Total amount: " + carPrice + " $");
+
+                    cardView1.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.GONE);
+                    Log.i("Database Error ", e.getMessage());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
     }
 
     private void refresh(int milliSecond){
@@ -199,7 +233,16 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
         }
 
         if(v.getId()==R.id.buyNowID){
-
+            finish();
+            Intent intent = new Intent(ParticularCarDetails.this, BuyActivity.class);
+            intent.putExtra("carImageUrl_key", carImageUrl);
+            intent.putExtra("carId_key", carId);
+            intent.putExtra("carBrand_key", carBrand);
+            intent.putExtra("carModel_key", carModel);
+            intent.putExtra("carHorsepower_key", carHorsepower);
+            intent.putExtra("carPrice_key", carPrice);
+            intent.putExtra("totalFinalPrice_key", measuredPrice);
+            startActivity(intent);
         }
     }
 
@@ -227,7 +270,8 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
                     cartReference.child(userPhone).child(carId).removeValue();
                     Toast.makeText(ParticularCarDetails.this, "Car removed from cart", Toast.LENGTH_SHORT).show();
 					count.setText("1");
-					totalPrice.setText("Total amount: " + carPrice + " $");
+                    measuredPrice = carPrice;
+					totalPrice.setText("Total amount: " + measuredPrice + " $");
                     cardView2.setVisibility(View.GONE);
                     cardView1.setVisibility(View.VISIBLE);
                 } catch (Exception e){

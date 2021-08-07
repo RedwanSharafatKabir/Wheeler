@@ -85,8 +85,6 @@ public class CartListCustomAdapter extends RecyclerView.Adapter<CartListCustomAd
                 it.putExtra("carModel_key", carModel);
                 it.putExtra("carHorsepower_key", carHorsepower);
                 it.putExtra("carPrice_key", carSinglePrice);
-                it.putExtra("carQuantity_key", String.valueOf(carQuantity));
-                it.putExtra("carCost_key", carCost);
                 context.startActivity(it);
             }
         });

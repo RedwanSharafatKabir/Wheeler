@@ -92,8 +92,6 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
             it.putExtra("carModel_key", carModel);
             it.putExtra("carHorsepower_key", carHorsepower);
             it.putExtra("carPrice_key", carPrice);
-            it.putExtra("carQuantity_key", "No Data");
-            it.putExtra("carCost_key", "No Data");
             context.startActivity(it);
         }
     }
