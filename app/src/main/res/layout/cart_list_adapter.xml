@@ -8,7 +8,6 @@
     android:background="@android:color/transparent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/media_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="5dp"
@@ -48,12 +47,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Brand:"
-                    android:textStyle="bold"
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:textColor="#000"
-                    android:fontFamily="serif-monospace"/>
+                    android:fontFamily="sans-serif"/>
 
                 <TextView
                     android:id="@+id/carModelAdapterID"
@@ -62,46 +60,42 @@
                     android:text="Model:"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="#000"
-                    android:fontFamily="serif-monospace"/>
+                    android:fontFamily="sans-serif"/>
 
                 <TextView
                     android:id="@+id/horsePowerAdapterID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Horsepower:"
-                    android:textStyle="bold"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:textSize="16sp"
                     android:textColor="#000"
-                    android:fontFamily="serif-monospace"/>
+                    android:fontFamily="sans-serif"/>
 
                 <TextView
                     android:id="@+id/quantityAdapterID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Quanity:"
-                    android:textStyle="bold"
                     android:textSize="16dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:textColor="#000000"
-                    android:fontFamily="serif-monospace"/>
+                    android:fontFamily="sans-serif"/>
 
                 <TextView
                     android:id="@+id/priceAdapterID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Cost:"
-                    android:textStyle="bold"
                     android:textSize="16dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:textColor="#F62525"
-                    android:fontFamily="serif-monospace"/>
+                    android:fontFamily="sans-serif"/>
 
                 <ImageView
                     android:id="@+id/deleteItemBtnId"

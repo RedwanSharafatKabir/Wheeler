@@ -8,7 +8,6 @@
     android:background="@android:color/transparent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/media_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="8dp"
@@ -49,13 +48,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Brand:"
-                    android:textStyle="bold"
                     android:textSize="16sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
                     android:textColor="#000"
-                    android:fontFamily="serif-monospace"/>
+                    android:fontFamily="sans-serif"/>
 
                 <TextView
                     android:id="@+id/carModelID"
@@ -64,34 +62,31 @@
                     android:text="Model:"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textStyle="bold"
                     android:textSize="16sp"
                     android:textColor="#000"
-                    android:fontFamily="serif-monospace"/>
+                    android:fontFamily="sans-serif"/>
 
                 <TextView
                     android:id="@+id/horsePowerID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Horsepower:"
-                    android:textStyle="bold"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:textSize="16sp"
                     android:textColor="#000"
-                    android:fontFamily="serif-monospace"/>
+                    android:fontFamily="sans-serif"/>
 
                 <TextView
                     android:id="@+id/priceID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Price:"
-                    android:textStyle="bold"
                     android:textSize="16dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:textColor="#F62525"
-                    android:fontFamily="serif-monospace"/>
+                    android:fontFamily="sans-serif"/>
             </LinearLayout>
 
         </LinearLayout>

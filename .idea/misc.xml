@@ -3,9 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/activity_buy.xml" value="0.209375" />
+        <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/activity_buy.xml" value="0.22" />
         <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/activity_cart_list.xml" value="0.209375" />
+        <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/activity_choose_car_models.xml" value="0.20615384615384616" />
         <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/activity_particular_car_details.xml" value="0.22" />
+        <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/cart_list_adapter.xml" value="0.209375" />
+        <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/recycler_view_custom_adapter.xml" value="0.209375" />
       </map>
     </option>
   </component>

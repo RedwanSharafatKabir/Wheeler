@@ -48,10 +48,10 @@ public class RecyclerViewCustomAdapter extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         CarApiData carApiData = carApiDataArrayList.get(position);
 
-        holder.horsepowerText.setText("Horsepower:" + carApiData.getHorsepower() + "hp");
-        holder.carBrandText.setText("Brand:" + carApiData.getMake());
-        holder.carModelText.setText("Model:" + carApiData.getModel());
-        holder.priceText.setText("Price:" + carApiData.getPrice() + "$");
+        holder.horsepowerText.setText("Horsepower: " + carApiData.getHorsepower() + " hp");
+        holder.carBrandText.setText("Brand: " + carApiData.getMake());
+        holder.carModelText.setText("Model: " + carApiData.getModel());
+        holder.priceText.setText("Price: " + carApiData.getPrice() + " $");
         Picasso.get().load(carApiData.getImg_url()).into(holder.imageUrlImageView);
     }
 

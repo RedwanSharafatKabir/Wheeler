@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -46,12 +49,16 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
     TextView countCartRedText;
     DatabaseReference orderBuyReference, cartReference;
     CardView countCartCardView;
+    ConnectivityManager cm;
+    NetworkInfo netInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_particular_car_details);
 
+        cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        netInfo = cm.getActiveNetworkInfo();
         userPhone = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
         orderBuyReference = FirebaseDatabase.getInstance().getReference("Order and Buy Information");
         cartReference = FirebaseDatabase.getInstance().getReference("Cart Information");
@@ -96,8 +103,14 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
         carPrice = it.getStringExtra("carPrice_key");
 
         Picasso.get().load(carImageUrl).into(imageView);
-        setCartItemValue();
-        checkCartItems();
+
+        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+            setCartItemValue();
+            checkCartItems();
+        } else {
+            Toast.makeText(ParticularCarDetails.this, "Turn on internet connection", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
     private void setCartItemValue(){
@@ -112,13 +125,14 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             totalPriceFromCart = snapshot.getValue().toString();
+                            measuredPrice = totalPriceFromCart;
 
                             carIdText.setText("Car ID: " + carId);
                             carBrandText.setText("Brand: " + carBrand);
                             carModelText.setText("Model: " + carModel);
                             carHorsepowerText.setText("Horsepower: " + carHorsepower + " hp");
                             carPriceText.setText("Price: " + carPrice + " $");
-                            totalPrice.setText("Total amount: " + totalPriceFromCart + " $");
+                            totalPrice.setText("Total: " + totalPriceFromCart + " $");
 
                             cardView2.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.GONE);
@@ -134,7 +148,8 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
                     carModelText.setText("Model: " + carModel);
                     carHorsepowerText.setText("Horsepower: " + carHorsepower + " hp");
                     carPriceText.setText("Price: " + carPrice + " $");
-                    totalPrice.setText("Total amount: " + carPrice + " $");
+                    totalPrice.setText("Total: " + carPrice + " $");
+                    measuredPrice = carPrice;
 
                     cardView1.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.GONE);
@@ -193,7 +208,7 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
             Double perPiecePrice = Double.parseDouble(carPrice);
             Double finalPrice = countCarNumber * perPiecePrice;
             measuredPrice = String.valueOf(finalPrice);
-            totalPrice.setText("Total amount: " + measuredPrice + " $");
+            totalPrice.setText("Total: " + measuredPrice + " $");
         }
 
         if(v.getId()==R.id.minusID){
@@ -206,7 +221,7 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
             Double perPiecePrice = Double.parseDouble(carPrice);
             Double finalPrice = countCarNumber * perPiecePrice;
             measuredPrice = String.valueOf(finalPrice);
-            totalPrice.setText("Total amount: " + measuredPrice + " $");
+            totalPrice.setText("Total: " + measuredPrice + " $");
         }
 
         if(v.getId()==R.id.addToCartID){
@@ -241,6 +256,7 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
             intent.putExtra("carModel_key", carModel);
             intent.putExtra("carHorsepower_key", carHorsepower);
             intent.putExtra("carPrice_key", carPrice);
+            intent.putExtra("carQuantity_key", count.getText().toString());
             intent.putExtra("totalFinalPrice_key", measuredPrice);
             startActivity(intent);
         }
@@ -271,7 +287,7 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
                     Toast.makeText(ParticularCarDetails.this, "Car removed from cart", Toast.LENGTH_SHORT).show();
 					count.setText("1");
                     measuredPrice = carPrice;
-					totalPrice.setText("Total amount: " + measuredPrice + " $");
+					totalPrice.setText("Total: " + measuredPrice + " $");
                     cardView2.setVisibility(View.GONE);
                     cardView1.setVisibility(View.VISIBLE);
                 } catch (Exception e){

@@ -125,8 +125,6 @@ public class CartListActivity extends AppCompatActivity implements View.OnClickL
                 intent.putExtra("carModel_key", carModel);
                 intent.putExtra("carHorsepower_key", carHorsepower);
                 intent.putExtra("carPrice_key", carPrice);
-                intent.putExtra("carQuantity_key", "No Data");
-                intent.putExtra("carCost_key", "No Data");
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
             }
@@ -150,8 +148,6 @@ public class CartListActivity extends AppCompatActivity implements View.OnClickL
             intent.putExtra("carModel_key", carModel);
             intent.putExtra("carHorsepower_key", carHorsepower);
             intent.putExtra("carPrice_key", carPrice);
-            intent.putExtra("carQuantity_key", "No Data");
-            intent.putExtra("carCost_key", "No Data");
             startActivity(intent);
             overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         }

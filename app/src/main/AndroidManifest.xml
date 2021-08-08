@@ -18,7 +18,8 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ViewOrderAddCart.BuyActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ViewOrderAddCart.CartListActivity"
             android:screenOrientation="portrait" />

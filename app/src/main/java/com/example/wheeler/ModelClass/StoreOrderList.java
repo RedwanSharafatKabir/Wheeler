@@ -1,31 +1,92 @@
 package com.example.wheeler.ModelClass;
 
 public class StoreOrderList {
-    private String carId;
+
+    private String quantity;
+    private String cost;
+    private String city;
+    private String area;
+    private String road;
+    private String house;
+    private String carImageUrl;
     private String carBrand;
     private String carModel;
     private String carHorsepower;
-    private int quantity;
-    private String carFinalPrice;
+    private String singlePrice;
 
     public StoreOrderList() {
     }
 
-    public StoreOrderList(String carId, String carBrand, String carModel, String carHorsepower, int quantity, String carFinalPrice) {
-        this.carId = carId;
+    public StoreOrderList(String quantity, String cost, String city, String area, String road, String house,
+                          String carImageUrl, String carBrand, String carModel, String carHorsepower, String singlePrice) {
+
+        this.quantity = quantity;
+        this.cost = cost;
+        this.city = city;
+        this.area = area;
+        this.road = road;
+        this.house = house;
+        this.carImageUrl = carImageUrl;
         this.carBrand = carBrand;
         this.carModel = carModel;
         this.carHorsepower = carHorsepower;
+        this.singlePrice = singlePrice;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
-        this.carFinalPrice = carFinalPrice;
     }
 
-    public String getCarId() {
-        return carId;
+    public String getCost() {
+        return cost;
     }
 
-    public void setCarId(String carId) {
-        this.carId = carId;
+    public void setCost(String cost) {
+        this.cost = cost;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public String getRoad() {
+        return road;
+    }
+
+    public void setRoad(String road) {
+        this.road = road;
+    }
+
+    public String getHouse() {
+        return house;
+    }
+
+    public void setHouse(String house) {
+        this.house = house;
+    }
+
+    public String getCarImageUrl() {
+        return carImageUrl;
+    }
+
+    public void setCarImageUrl(String carImageUrl) {
+        this.carImageUrl = carImageUrl;
     }
 
     public String getCarBrand() {
@@ -52,19 +113,11 @@ public class StoreOrderList {
         this.carHorsepower = carHorsepower;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getSinglePrice() {
+        return singlePrice;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getCarFinalPrice() {
-        return carFinalPrice;
-    }
-
-    public void setCarFinalPrice(String carFinalPrice) {
-        this.carFinalPrice = carFinalPrice;
+    public void setSinglePrice(String singlePrice) {
+        this.singlePrice = singlePrice;
     }
 }

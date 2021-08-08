@@ -64,9 +64,9 @@ public class CartListCustomAdapter extends RecyclerView.Adapter<CartListCustomAd
         Picasso.get().load(carImageUrl).into(holder.imageView);
         holder.textView1.setText("Brand: " + carBrand);
         holder.textView2.setText("Model: " + carModel);
-        holder.textView3.setText("Horsepower: " + carHorsepower);
+        holder.textView3.setText("Horsepower: " + carHorsepower + " hp");
         holder.textView4.setText("Quantity: " + carQuantity);
-        holder.textView5.setText("Cost: " + carCost);
+        holder.textView5.setText("Cost: " + carCost + " $");
 
         holder.deleteCarBtn.setOnClickListener(new View.OnClickListener() {
             @Override

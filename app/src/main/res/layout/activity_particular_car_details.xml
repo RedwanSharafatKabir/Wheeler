@@ -25,15 +25,16 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/upperRecyclerViewId"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             app:cardUseCompatPadding="true"
             app:cardElevation="5dp"
-            app:cardCornerRadius="5dp"
-            android:layout_marginTop="50dp">
+            app:cardCornerRadius="5dp">
 
             <ImageView
                 android:id="@+id/imageUrlParticularID"
@@ -47,7 +48,9 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="270dp">
+            android:layout_below="@+id/upperRecyclerViewId"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,10 +65,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="Car ID:"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="#000"
-                    android:fontFamily="serif-monospace"
+                    android:fontFamily="sans-serif"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"/>
 
@@ -74,12 +76,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Brand:"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:textColor="#000"
-                    android:fontFamily="serif-monospace"
+                    android:fontFamily="sans-serif"
                     android:layout_marginTop="8dp"/>
 
                 <TextView
@@ -89,10 +90,9 @@
                     android:text="Model:"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="#000"
-                    android:fontFamily="serif-monospace"
+                    android:fontFamily="sans-serif"
                     android:layout_marginTop="8dp"/>
 
                 <TextView
@@ -100,12 +100,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Horsepower:"
-                    android:textStyle="bold"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="#000"
-                    android:fontFamily="serif-monospace"
+                    android:fontFamily="sans-serif"
                     android:layout_marginTop="8dp"/>
 
                 <TextView
@@ -113,12 +112,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Price:"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textColor="#F62525"
-                    android:fontFamily="serif-monospace"
+                    android:textColor="#000000"
+                    android:fontFamily="sans-serif"
                     android:layout_marginTop="8dp"/>
 
                 <TextView
@@ -126,12 +124,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Quantity:"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:textColor="#000000"
-                    android:fontFamily="serif-monospace"
+                    android:fontFamily="sans-serif"
                     android:layout_marginTop="8dp"/>
 
                 <LinearLayout
@@ -207,13 +204,12 @@
                     android:id="@+id/totalAmountParticularID"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Total amount:"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:text="Total:"
+                    android:textSize="16sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:textColor="#000000"
-                    android:fontFamily="serif-monospace"
+                    android:textColor="#F62525"
+                    android:fontFamily="sans-serif"
                     android:layout_marginTop="20dp"/>
 
                 <RelativeLayout
