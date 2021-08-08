@@ -204,11 +204,12 @@ public class BuyActivity extends AppCompatActivity implements View.OnClickListen
                                    String quantity, String totalPrice, String carImageUrl, String carBrand, String carModel,
                                    String carHorsepower, String singlePrice){
 
-        StoreOrderList storeOrderList = new StoreOrderList(quantity, totalPrice, city, area, road, house,
+        StoreOrderList storeOrderList = new StoreOrderList(carId, quantity, totalPrice, city, area, road, house,
                 carImageUrl, carBrand, carModel, carHorsepower, singlePrice);
 
         databaseReference.child(userPhone).child(carId).setValue(storeOrderList);
 
+        Toast.makeText(BuyActivity.this, "Successfully Ordered", Toast.LENGTH_SHORT).show();
         snackbar = Snackbar.make(parentLayout, "Your order will be delivered within 60 minutes", Snackbar.LENGTH_LONG);
         snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
         snackbar.show();

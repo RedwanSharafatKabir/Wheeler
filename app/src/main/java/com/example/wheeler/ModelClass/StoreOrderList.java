@@ -2,6 +2,7 @@ package com.example.wheeler.ModelClass;
 
 public class StoreOrderList {
 
+    private String carId;
     private String quantity;
     private String cost;
     private String city;
@@ -17,9 +18,10 @@ public class StoreOrderList {
     public StoreOrderList() {
     }
 
-    public StoreOrderList(String quantity, String cost, String city, String area, String road, String house,
+    public StoreOrderList(String carId, String quantity, String cost, String city, String area, String road, String house,
                           String carImageUrl, String carBrand, String carModel, String carHorsepower, String singlePrice) {
 
+        this.carId = carId;
         this.quantity = quantity;
         this.cost = cost;
         this.city = city;
@@ -31,6 +33,14 @@ public class StoreOrderList {
         this.carModel = carModel;
         this.carHorsepower = carHorsepower;
         this.singlePrice = singlePrice;
+    }
+
+    public String getCarId() {
+        return carId;
+    }
+
+    public void setCarId(String carId) {
+        this.carId = carId;
     }
 
     public String getQuantity() {

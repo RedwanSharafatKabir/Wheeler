@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.wheeler.R;
 import com.example.wheeler.ViewOrderAddCart.CartListActivity;
 import com.example.wheeler.ViewOrderAddCart.ChooseCarModelActivity;
+import com.example.wheeler.ViewOrderAddCart.OrderListActivity;
 import com.example.wheeler.ViewOrderAddCart.ParticularCarDetails;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -50,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     Snackbar snackbar;
     ActionBarDrawerToggle actionBarDrawerToggle;
     View hView, parentLayout;
-    boolean connected = false;
     ConnectivityManager cm;
     NetworkInfo netInfo;
     Fragment fragment;
@@ -102,10 +102,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             case R.id.paymentMethodID:
                 if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                    connected = true;
                     paymentMethod();
                 } else {
-                    connected = false;
                     snackbar = Snackbar.make(parentLayout, "Turn on internet connection", Snackbar.LENGTH_LONG);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.Red));
@@ -116,14 +114,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             case R.id.feedbackID:
                 if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                    connected = true;
                     fragment = new Feedback();
                     feedbackTransaction = getSupportFragmentManager().beginTransaction();
                     feedbackTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
                     feedbackTransaction.replace(R.id.fragmentID, fragment);
                     feedbackTransaction.commit();
                 } else {
-                    connected = false;
                     snackbar = Snackbar.make(parentLayout, "Turn on internet connection", Snackbar.LENGTH_LONG);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.Red));
@@ -138,13 +134,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             case R.id.homeID:
                 if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                    connected = true;
                     fragment = new ChooseCarModelActivity();
                     feedbackTransaction = getSupportFragmentManager().beginTransaction();
                     feedbackTransaction.replace(R.id.fragmentID, fragment);
                     feedbackTransaction.commit();
                 } else {
-                    connected = false;
                     snackbar = Snackbar.make(parentLayout, "Turn on internet connection", Snackbar.LENGTH_LONG);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.Red));
@@ -155,10 +149,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             case R.id.notificationID:
                 if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                    connected = true;
                     Toast.makeText(this, "Notification", Toast.LENGTH_SHORT).show();
                 } else {
-                    connected = false;
                     snackbar = Snackbar.make(parentLayout, "Turn on internet connection", Snackbar.LENGTH_LONG);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.Red));
@@ -169,10 +161,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             case R.id.ordersID:
                 if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                    connected = true;
-                    Toast.makeText(this, "Order Record Fragment", Toast.LENGTH_SHORT).show();
+                    finish();
+                    Intent intent = new Intent(MainActivity.this, OrderListActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 } else {
-                    connected = false;
                     snackbar = Snackbar.make(parentLayout, "Turn on internet connection", Snackbar.LENGTH_LONG);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.Red));
@@ -188,7 +181,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     intent.putExtra("cart_key", "MainActivity");
                     startActivity(intent);
                 } else {
-                    connected = false;
                     snackbar = Snackbar.make(parentLayout, "Turn on internet connection", Snackbar.LENGTH_LONG);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.Red));
@@ -199,14 +191,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             case R.id.accountID:
                 if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-                    connected = true;
                     fragment = new ProfileAccount();
                     feedbackTransaction = getSupportFragmentManager().beginTransaction();
                     feedbackTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
                     feedbackTransaction.replace(R.id.fragmentID, fragment);
                     feedbackTransaction.commit();
                 } else {
-                    connected = false;
                     snackbar = Snackbar.make(parentLayout, "Turn on internet connection", Snackbar.LENGTH_LONG);
                     View sbView = snackbar.getView();
                     sbView.setBackgroundColor(ContextCompat.getColor(MainActivity.this, R.color.Red));
