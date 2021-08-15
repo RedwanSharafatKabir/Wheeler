@@ -25,6 +25,7 @@ import com.example.wheeler.AppActions.MainActivity;
 import com.example.wheeler.ModelClass.StoreCartList;
 import com.example.wheeler.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,6 +52,8 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
     CardView countCartCardView;
     ConnectivityManager cm;
     NetworkInfo netInfo;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +62,9 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
 
         cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         netInfo = cm.getActiveNetworkInfo();
-        userPhone = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
         orderBuyReference = FirebaseDatabase.getInstance().getReference("Order and Buy Information");
         cartReference = FirebaseDatabase.getInstance().getReference("Cart Information");
 
@@ -105,8 +110,14 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
         Picasso.get().load(carImageUrl).into(imageView);
 
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            setCartItemValue();
-            checkCartItems();
+            if(user!=null) {
+                setCartItemValue();
+                checkCartItems();
+                userPhone = user.getDisplayName();
+            } else {
+                Toast.makeText(ParticularCarDetails.this, "Login First", Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
+            }
         } else {
             Toast.makeText(ParticularCarDetails.this, "Turn on internet connection", Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.GONE);
@@ -265,11 +276,17 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
     private void storeToCartList(String carId, String carBrand, String carModel, String carHorsepower,
                                  int quantity, String carFinalPrice, String carSinglePrice, String carImageUrl){
 
-        StoreCartList storeCartList = new StoreCartList(carId, carBrand, carModel, carHorsepower,
-                quantity, carFinalPrice, carSinglePrice, carImageUrl);
-        cartReference.child(userPhone).child(carId).setValue(storeCartList);
+        if(user!=null) {
+            StoreCartList storeCartList = new StoreCartList(carId, carBrand, carModel, carHorsepower,
+                    quantity, carFinalPrice, carSinglePrice, carImageUrl);
+            cartReference.child(userPhone).child(carId).setValue(storeCartList);
 
-        Toast.makeText(ParticularCarDetails.this, "Car added to cart", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ParticularCarDetails.this, "Car added to cart", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(ParticularCarDetails.this, "Login First", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
     private void removeFromCartMethod(){
@@ -283,13 +300,25 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
-                    cartReference.child(userPhone).child(carId).removeValue();
-                    Toast.makeText(ParticularCarDetails.this, "Car removed from cart", Toast.LENGTH_SHORT).show();
-					count.setText("1");
-                    measuredPrice = carPrice;
-					totalPrice.setText("Total: " + measuredPrice + " $");
-                    cardView2.setVisibility(View.GONE);
-                    cardView1.setVisibility(View.VISIBLE);
+                    if(user!=null) {
+                        cartReference.child(userPhone).child(carId).removeValue();
+                        Toast.makeText(ParticularCarDetails.this, "Car removed from cart", Toast.LENGTH_SHORT).show();
+                        count.setText("1");
+                        measuredPrice = carPrice;
+                        totalPrice.setText("Total: " + measuredPrice + " $");
+                        cardView2.setVisibility(View.GONE);
+                        cardView1.setVisibility(View.VISIBLE);
+
+                    } else {
+                        Toast.makeText(ParticularCarDetails.this, "Login First", Toast.LENGTH_LONG).show();
+                        count.setText("1");
+                        measuredPrice = carPrice;
+                        totalPrice.setText("Total: " + measuredPrice + " $");
+                        cardView2.setVisibility(View.GONE);
+                        cardView1.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                    }
+
                 } catch (Exception e){
                     Log.i("Removed ", e.getMessage());
                 }

@@ -38,7 +38,7 @@ public class ChooseCarModelActivity extends Fragment {
     View views, parentLayout;
     String brandNameContent = "", brandImageContent = "";
     public RecyclerView recyclerView;
-    String TAG = "REDWAN", baseURL = "https://private-anon-d011506c2c-carsapi1.apiary-mock.com/";
+    String TAG = "REDWAN", baseURL = "https://private-anon-dad4f18112-carsapi1.apiary-mock.com/";
     CarApiClient carApiClient;
     RecyclerViewCustomAdapter recyclerViewCustomAdapter;
     List<CarApiData> carApiDataList;
@@ -126,6 +126,7 @@ public class ChooseCarModelActivity extends Fragment {
             @Override
             public void onFailure(Call<List<CarApiData>> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
+
                 try {
                     Log.i(TAG, "Response failure: " + t.getMessage());
                 } catch (Exception e){

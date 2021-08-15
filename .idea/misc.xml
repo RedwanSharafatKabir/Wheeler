@@ -9,8 +9,11 @@
         <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/activity_order_list.xml" value="0.209375" />
         <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/activity_particular_car_details.xml" value="0.22" />
         <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/cart_list_adapter.xml" value="0.209375" />
+        <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/fragment_feedback.xml" value="0.209375" />
+        <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/fragment_profile.xml" value="0.22" />
         <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/order_list_adapter.xml" value="0.1953125" />
         <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/recycler_view_custom_adapter.xml" value="0.209375" />
+        <entry key="..\:/Android Projects/Wheeler/app/src/main/res/layout/reset_password.xml" value="0.209375" />
       </map>
     </option>
   </component>

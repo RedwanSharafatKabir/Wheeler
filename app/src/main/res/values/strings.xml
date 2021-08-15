@@ -7,5 +7,6 @@
     <string name="drawerOpen">drawerOpen</string>
     <string name="drawerClose">drawerClose</string>
     <string name="about_app">Wheeler is an E-Commerce app which is available for android platform.\nYou can buy any car brand from this app.</string>
+    <string name="loginText"><u>Login</u></string>
 
 </resources>

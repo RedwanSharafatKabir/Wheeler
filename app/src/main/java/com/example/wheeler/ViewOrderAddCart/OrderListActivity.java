@@ -12,12 +12,16 @@ import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import com.example.wheeler.AppActions.MainActivity;
 import com.example.wheeler.ModelClass.StoreCartList;
 import com.example.wheeler.ModelClass.StoreOrderList;
 import com.example.wheeler.R;
 import com.example.wheeler.RecyclerView.CartListCustomAdapter;
 import com.example.wheeler.RecyclerView.OrderListCustomAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,12 +40,16 @@ public class OrderListActivity extends AppCompatActivity implements View.OnClick
     ArrayList<StoreOrderList> storeOrderListArrayList;
     OrderListCustomAdapter orderListCustomAdapter;
     DatabaseReference databaseReference;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list);
 
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
         cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         netInfo = cm.getActiveNetworkInfo();
 
@@ -62,7 +70,13 @@ public class OrderListActivity extends AppCompatActivity implements View.OnClick
         storeOrderListArrayList = new ArrayList<StoreOrderList>();
         databaseReference = FirebaseDatabase.getInstance().getReference("Order and Buy Information");
 
-        loadOrderList();
+        if(user!=null) {
+            loadOrderList();
+
+        } else {
+            Toast.makeText(OrderListActivity.this, "Login First", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
     private void loadOrderList(){

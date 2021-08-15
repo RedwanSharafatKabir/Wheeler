@@ -19,11 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wheeler.AppActions.MainActivity;
+import com.example.wheeler.ModelClass.StoreCartList;
 import com.example.wheeler.ModelClass.StoreOrderList;
 import com.example.wheeler.R;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,6 +46,8 @@ public class BuyActivity extends AppCompatActivity implements View.OnClickListen
     String carImageUrl, carId, carBrand, carModel, carHorsepower, userPhone, totalPrice, quantity, city, area, road, house, singlePrice;
     TextView carBrandText, carModelText, carHorsepowerText, totalPriceText, count, singlePriceText;
     DatabaseReference databaseReference;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +60,8 @@ public class BuyActivity extends AppCompatActivity implements View.OnClickListen
         cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         netInfo = cm.getActiveNetworkInfo();
         databaseReference = FirebaseDatabase.getInstance().getReference("Order and Buy Information");
-        userPhone = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
 
         Intent intent = getIntent();
         carImageUrl = intent.getStringExtra("carImageUrl_key");
@@ -95,7 +100,13 @@ public class BuyActivity extends AppCompatActivity implements View.OnClickListen
         totalPriceText.setText("Total: " + totalPrice + " $");
 
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            checkOrderItems();
+            if(user!=null) {
+                checkOrderItems();
+                userPhone = user.getDisplayName();
+            } else {
+                Toast.makeText(BuyActivity.this, "Login First", Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
+            }
         } else {
             Toast.makeText(BuyActivity.this, "Turn on internet connection", Toast.LENGTH_LONG).show();
             progressBar.setVisibility(View.GONE);
@@ -204,15 +215,21 @@ public class BuyActivity extends AppCompatActivity implements View.OnClickListen
                                    String quantity, String totalPrice, String carImageUrl, String carBrand, String carModel,
                                    String carHorsepower, String singlePrice){
 
-        StoreOrderList storeOrderList = new StoreOrderList(carId, quantity, totalPrice, city, area, road, house,
-                carImageUrl, carBrand, carModel, carHorsepower, singlePrice);
+        if(user!=null) {
+            StoreOrderList storeOrderList = new StoreOrderList(carId, quantity, totalPrice, city, area, road, house,
+                    carImageUrl, carBrand, carModel, carHorsepower, singlePrice);
 
-        databaseReference.child(userPhone).child(carId).setValue(storeOrderList);
+            databaseReference.child(userPhone).child(carId).setValue(storeOrderList);
 
-        Toast.makeText(BuyActivity.this, "Successfully Ordered", Toast.LENGTH_SHORT).show();
-        snackbar = Snackbar.make(parentLayout, "Your order will be delivered within 60 minutes", Snackbar.LENGTH_LONG);
-        snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
-        snackbar.show();
+            Toast.makeText(BuyActivity.this, "Successfully Ordered", Toast.LENGTH_SHORT).show();
+            snackbar = Snackbar.make(parentLayout, "Your order will be delivered within 60 minutes", Snackbar.LENGTH_LONG);
+            snackbar.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
+            snackbar.show();
+
+        } else {
+            Toast.makeText(BuyActivity.this, "Login First", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
     @Override

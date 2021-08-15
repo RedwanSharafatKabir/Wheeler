@@ -30,6 +30,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.sslwireless.sslcommerzlibrary.model.initializer.SSLCCustomerInfoInitializer;
 import com.sslwireless.sslcommerzlibrary.model.initializer.SSLCProductInitializer;
 import com.sslwireless.sslcommerzlibrary.model.initializer.SSLCShipmentInfoInitializer;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
         drawerLayout = findViewById(R.id.drawerID);
         toolbar = findViewById(R.id.toolBarID);
         setSupportActionBar(toolbar);
@@ -252,11 +254,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         alertDialogBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mAuth.getInstance().signOut();
-                finish();
-                Intent it = new Intent(MainActivity.this, SplashScreen.class);
-                startActivity(it);
-                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                FirebaseUser user = mAuth.getCurrentUser();
+                if(user!=null){
+                    mAuth.signOut();
+                    finish();
+                    Intent it = new Intent(MainActivity.this, SplashScreen.class);
+                    startActivity(it);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+                } else {
+                    dialog.cancel();
+                }
             }
         });
 

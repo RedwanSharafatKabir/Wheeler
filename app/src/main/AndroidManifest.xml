@@ -40,8 +40,14 @@
             android:name=".UserAuthentication.SigninActivity"
             android:screenOrientation="portrait"
             tools:ignore="Instantiatable" />
+
         <activity
             android:name=".AppActions.SplashScreen"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".AppActions.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,15 +55,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".AppActions.MainActivity"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

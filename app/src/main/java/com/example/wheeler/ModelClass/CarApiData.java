@@ -1,6 +1,7 @@
 package com.example.wheeler.ModelClass;
 
 public class CarApiData {
+    public String year;
     public String id;
     public String horsepower;
     public String make;
@@ -8,13 +9,22 @@ public class CarApiData {
     public String price;
     public String img_url;
 
-    public CarApiData(String id, String horsepower, String make, String model, String price, String img_url) {
+    public CarApiData(String year, String id, String horsepower, String make, String model, String price, String img_url) {
+        this.year = year;
         this.id = id;
         this.horsepower = horsepower;
         this.make = make;
         this.model = model;
         this.price = price;
         this.img_url = img_url;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public String getId() {
@@ -68,7 +78,8 @@ public class CarApiData {
     @Override
     public String toString() {
         return "CarApiData{" +
-                "id='" + id + '\'' +
+                "year='" + year + '\'' +
+                ", id='" + id + '\'' +
                 ", horsepower='" + horsepower + '\'' +
                 ", make='" + make + '\'' +
                 ", model='" + model + '\'' +
