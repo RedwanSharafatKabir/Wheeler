@@ -101,8 +101,8 @@ public class BuyActivity extends AppCompatActivity implements View.OnClickListen
 
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
             if(user!=null) {
-                checkOrderItems();
                 userPhone = user.getDisplayName();
+                checkOrderItems();
             } else {
                 Toast.makeText(BuyActivity.this, "Login First", Toast.LENGTH_LONG).show();
                 progressBar.setVisibility(View.GONE);
@@ -114,57 +114,63 @@ public class BuyActivity extends AppCompatActivity implements View.OnClickListen
     }
 
     private void checkOrderItems(){
-        databaseReference.child(userPhone).child(carId).child("city").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                try {
-                    city = snapshot.getValue().toString();
-                    cityText.setText(city);
+        try{
+            databaseReference.child(userPhone).child(carId).child("city").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    try {
+                        city = snapshot.getValue().toString();
+                        cityText.setText(city);
 
-                    databaseReference.child(userPhone).child(carId).child("area").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            area = snapshot.getValue().toString();
-                            areaText.setText(area);
-                        }
+                        databaseReference.child(userPhone).child(carId).child("area").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                area = snapshot.getValue().toString();
+                                areaText.setText(area);
+                            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {}
-                    });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {}
+                        });
 
-                    databaseReference.child(userPhone).child(carId).child("road").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            road = snapshot.getValue().toString();
-                            roadText.setText(road);
-                        }
+                        databaseReference.child(userPhone).child(carId).child("road").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                road = snapshot.getValue().toString();
+                                roadText.setText(road);
+                            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {}
-                    });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {}
+                        });
 
-                    databaseReference.child(userPhone).child(carId).child("house").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            house = snapshot.getValue().toString();
-                            houseText.setText(house);
+                        databaseReference.child(userPhone).child(carId).child("house").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                house = snapshot.getValue().toString();
+                                houseText.setText(house);
 
-                            progressBar.setVisibility(View.GONE);
-                        }
+                                progressBar.setVisibility(View.GONE);
+                            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {}
-                    });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {}
+                        });
 
-                } catch (Exception e) {
-                    Log.i("Database Error ", e.getMessage());
-                    progressBar.setVisibility(View.GONE);
+                    } catch (Exception e) {
+                        Log.i("Database Error ", e.getMessage());
+                        progressBar.setVisibility(View.GONE);
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {}
+            });
+
+        } catch (Exception e){
+            Log.i("Database Error ", e.getMessage());
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
     @Override

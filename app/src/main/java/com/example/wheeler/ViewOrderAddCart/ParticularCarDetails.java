@@ -48,7 +48,7 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
     int countCarNumber = 1;
     CircleImageView cartFloatingBtn;
     TextView countCartRedText;
-    DatabaseReference orderBuyReference, cartReference;
+    DatabaseReference cartReference;
     CardView countCartCardView;
     ConnectivityManager cm;
     NetworkInfo netInfo;
@@ -65,7 +65,6 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
 
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
-        orderBuyReference = FirebaseDatabase.getInstance().getReference("Order and Buy Information");
         cartReference = FirebaseDatabase.getInstance().getReference("Cart Information");
 
         progressBar = findViewById(R.id.particularCarProgressBarId);
@@ -111,9 +110,9 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
 
         if (netInfo != null && netInfo.isConnectedOrConnecting()) {
             if(user!=null) {
+                userPhone = user.getDisplayName();
                 setCartItemValue();
                 checkCartItems();
-                userPhone = user.getDisplayName();
             } else {
                 Toast.makeText(ParticularCarDetails.this, "Login First", Toast.LENGTH_LONG).show();
                 progressBar.setVisibility(View.GONE);
@@ -125,52 +124,67 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
     }
 
     private void setCartItemValue(){
-        cartReference.child(userPhone).child(carId).child("quantity").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                try {
-                    quantityFromCart = snapshot.getValue().toString();
-                    count.setText(quantityFromCart);
+        try{
+            cartReference.child(userPhone).child(carId).child("quantity").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    try {
+                        quantityFromCart = snapshot.getValue().toString();
+                        count.setText(quantityFromCart);
 
-                    cartReference.child(userPhone).child(carId).child("carFinalPrice").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            totalPriceFromCart = snapshot.getValue().toString();
-                            measuredPrice = totalPriceFromCart;
+                        cartReference.child(userPhone).child(carId).child("carFinalPrice").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                totalPriceFromCart = snapshot.getValue().toString();
+                                measuredPrice = totalPriceFromCart;
 
-                            carIdText.setText("Car ID: " + carId);
-                            carBrandText.setText("Brand: " + carBrand);
-                            carModelText.setText("Model: " + carModel);
-                            carHorsepowerText.setText("Horsepower: " + carHorsepower + " hp");
-                            carPriceText.setText("Price: " + carPrice + " $");
-                            totalPrice.setText("Total: " + totalPriceFromCart + " $");
+                                carIdText.setText("Car ID: " + carId);
+                                carBrandText.setText("Brand: " + carBrand);
+                                carModelText.setText("Model: " + carModel);
+                                carHorsepowerText.setText("Horsepower: " + carHorsepower + " hp");
+                                carPriceText.setText("Price: " + carPrice + " $");
+                                totalPrice.setText("Total: " + totalPriceFromCart + " $");
 
-                            cardView2.setVisibility(View.VISIBLE);
-                            progressBar.setVisibility(View.GONE);
-                        }
+                                cardView2.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
+                            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {}
-                    });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {}
+                        });
 
-                } catch (Exception e) {
-                    carIdText.setText("Car ID: " + carId);
-                    carBrandText.setText("Brand: " + carBrand);
-                    carModelText.setText("Model: " + carModel);
-                    carHorsepowerText.setText("Horsepower: " + carHorsepower + " hp");
-                    carPriceText.setText("Price: " + carPrice + " $");
-                    totalPrice.setText("Total: " + carPrice + " $");
-                    measuredPrice = carPrice;
+                    } catch (Exception e) {
+                        carIdText.setText("Car ID: " + carId);
+                        carBrandText.setText("Brand: " + carBrand);
+                        carModelText.setText("Model: " + carModel);
+                        carHorsepowerText.setText("Horsepower: " + carHorsepower + " hp");
+                        carPriceText.setText("Price: " + carPrice + " $");
+                        totalPrice.setText("Total: " + carPrice + " $");
+                        measuredPrice = carPrice;
 
-                    cardView1.setVisibility(View.VISIBLE);
-                    progressBar.setVisibility(View.GONE);
-                    Log.i("Database Error ", e.getMessage());
+                        cardView1.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        Log.i("Database Error ", e.getMessage());
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {}
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {}
+            });
+
+        } catch (Exception e) {
+            carIdText.setText("Car ID: " + carId);
+            carBrandText.setText("Brand: " + carBrand);
+            carModelText.setText("Model: " + carModel);
+            carHorsepowerText.setText("Horsepower: " + carHorsepower + " hp");
+            carPriceText.setText("Price: " + carPrice + " $");
+            totalPrice.setText("Total: " + carPrice + " $");
+            measuredPrice = carPrice;
+
+            cardView1.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+            Log.i("Database Error ", e.getMessage());
+        }
     }
 
     private void refresh(int milliSecond){
@@ -187,19 +201,23 @@ public class ParticularCarDetails extends AppCompatActivity implements View.OnCl
     }
 
     private void checkCartItems(){
-        cartReference.child(userPhone).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if(snapshot.getChildrenCount()>0){
-                    countCartCardView.setVisibility(View.VISIBLE);
-                    countCartRedText.setVisibility(View.VISIBLE);
-                    countCartRedText.setText(String.valueOf(snapshot.getChildrenCount()));
+        try{
+            cartReference.child(userPhone).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    if(snapshot.getChildrenCount()>0){
+                        countCartCardView.setVisibility(View.VISIBLE);
+                        countCartRedText.setVisibility(View.VISIBLE);
+                        countCartRedText.setText(String.valueOf(snapshot.getChildrenCount()));
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {}
-        });
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {}
+            });
+        } catch (Exception e){
+            Log.i("Database Error ", e.getMessage());
+        }
 
         refresh(1000);
     }
